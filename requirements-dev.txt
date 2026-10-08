@@ -1,0 +1,24 @@
+# LogiEdge development and training environment.
+#
+# Python 3.11 is recommended. tensorflow-model-optimization (needed for the
+# M3 pruning variant) targets the Keras 2 API, so tf-keras is pinned alongside
+# TensorFlow and TF_USE_LEGACY_KERAS=1 is set in training/common.py.
+#
+# The inference CONTAINER does not use this file -- see inference/requirements.txt,
+# which installs only tflite-runtime and is ~100x smaller.
+
+tensorflow>=2.16,<2.22
+tf-keras>=2.16
+tensorflow-model-optimization>=0.8.0
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.3
+pandas>=2.0
+matplotlib>=3.8
+psutil>=5.9
+paho-mqtt>=2.0
+PyYAML>=6.0
+
+# Ansible is installed separately; on Windows it requires WSL2.
+#   pip install ansible
+#   ansible-galaxy collection install community.docker

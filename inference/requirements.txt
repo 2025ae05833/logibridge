@@ -1,0 +1,9 @@
+# LogiEdge inference container dependencies.
+#
+# tflite-runtime rather than full tensorflow: the full package is ~600 MB,
+# the runtime is ~5 MB. On an 85-truck fleet over M2M SIMs that difference
+# is the whole argument. It is also all the container needs -- training
+# happens off-truck.
+tflite-runtime==2.14.0
+numpy==1.26.4
+paho-mqtt==2.1.0

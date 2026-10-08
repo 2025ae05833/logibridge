@@ -1,0 +1,103 @@
+{
+  "config": {
+    "warmup_runs": 10,
+    "timed_runs": 200,
+    "tdp_w": 15.0,
+    "split": "random",
+    "n_val_windows": 57
+  },
+  "results": [
+    {
+      "variant": "M1",
+      "description": "FP32 baseline",
+      "mean_latency_ms": 0.0016,
+      "p95_latency_ms": 0.0014,
+      "size_kb": 5.26,
+      "accuracy_pct": 94.74,
+      "energy_mj": 0.0220637,
+      "class2_recall_pct": 100.0,
+      "confusion_matrix": [
+        [
+          21,
+          2,
+          0
+        ],
+        [
+          1,
+          16,
+          0
+        ],
+        [
+          0,
+          0,
+          17
+        ]
+      ],
+      "cpu_pct_during_block": 92.5,
+      "latency_spread_ms": 0.000886
+    },
+    {
+      "variant": "M2",
+      "description": "PTQ INT8",
+      "mean_latency_ms": 0.0015,
+      "p95_latency_ms": 0.0014,
+      "size_kb": 4.55,
+      "accuracy_pct": 96.49,
+      "energy_mj": 0.0222431,
+      "class2_recall_pct": 100.0,
+      "confusion_matrix": [
+        [
+          21,
+          2,
+          0
+        ],
+        [
+          0,
+          17,
+          0
+        ],
+        [
+          0,
+          0,
+          17
+        ]
+      ],
+      "cpu_pct_during_block": 92.4,
+      "latency_spread_ms": 0.001019
+    },
+    {
+      "variant": "M3",
+      "description": "Pruned 35% + INT8",
+      "mean_latency_ms": 0.0012,
+      "p95_latency_ms": 0.0012,
+      "size_kb": 3.84,
+      "accuracy_pct": 98.25,
+      "energy_mj": 0.0219146,
+      "class2_recall_pct": 100.0,
+      "confusion_matrix": [
+        [
+          23,
+          0,
+          0
+        ],
+        [
+          1,
+          16,
+          0
+        ],
+        [
+          0,
+          0,
+          17
+        ]
+      ],
+      "cpu_pct_during_block": 94.4,
+      "latency_spread_ms": 0.000179
+    }
+  ],
+  "class_names": [
+    "Normal",
+    "Warning",
+    "Critical"
+  ]
+}

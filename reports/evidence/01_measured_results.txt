@@ -1,0 +1,66 @@
+========================================================================
+ LogiEdge - measured results for the report (Group 18)
+========================================================================
+
+D1 - TRAINING GATE
+  architecture      Dense(32,relu) -> Dense(16,relu) -> Dense(3,softmax)
+  parameters        803   epochs run 36
+  random split       94.74%   (gate 88.0%)  -> PASSED
+  blocked split     100.00%   (no window overlap)
+  Class 2 recall     100.0% random / 100.0% blocked
+  per-class recall  N 91.3%  W 94.1%  C 100.0%
+  confusion matrix (random split, rows=true N/W/C):
+      N  [21, 2, 0]
+      W  [1, 16, 0]
+      C  [0, 0, 17]
+
+F1 - M2 POST-TRAINING QUANTISATION
+  M1 FP32 TFLite      5.26 KB   94.74%
+  M2 full INT8        4.55 KB   96.49%
+  compression       1.155x
+  calibration       234 samples (spec requires >=200)
+  M1/M2 agreement   98.25%
+
+F1 - M3 STRUCTURED PRUNING + INT8
+  target sparsity   0.35
+  units             48 -> 31  (35.42% removed)
+  layer shapes      dense_0 32->21, dense_1 16->10
+  parameters        803 -> 400  (50.19% removed)
+  size / accuracy   3.84 KB   98.25%   C2 recall 100.0%
+
+F2 - FIVE-METRIC BENCHMARK  (the 15-cell table)
+           mean ms    p95 ms   size KB    acc %   energy mJ  C2 recall
+  --------------------------------------------------------------
+  M1        0.0016    0.0014      5.26    94.74    0.022064     100.0%
+  M2        0.0015    0.0014      4.55    96.49    0.022243     100.0%
+  M3        0.0012    0.0012      3.84    98.25    0.021915     100.0%
+
+  relative to M1:
+    M2: 1.07x faster, 1.16x smaller, +1.75 pp accuracy
+    M3: 1.33x faster, 1.37x smaller, +3.51 pp accuracy
+
+E1 - PSI REFERENCE DISTRIBUTION
+  built from 300 clean Normal windows, score = p_normal
+    [0.00,0.25)   0.003  
+    [0.25,0.50)   0.253  ##########
+    [0.50,0.75)   0.587  #######################
+    [0.75,1.00]   0.157  ######
+
+C2 - NORMALISATION 3-SIGMA EXPERIMENT
+  condition         accuracy    delta   recall N  recall W  recall C
+  ------------------------------------------------------------------
+  correct             96.49%   +0.00      91.3%    100.0%    100.0%
+  mean +3 sigma       91.23%   -5.26     100.0%     70.6%    100.0%
+  mean -3 sigma       94.74%   -1.75      87.0%    100.0%    100.0%
+  std x3              94.74%   -1.75      95.7%     88.2%    100.0%
+  Worst corrupted condition: mean +3 sigma at 91.23% accuracy, -5.26 pp
+  Class 1 Warning  recall: 100.0% correct  ->   70.6% worst corrupted  (-29.4 pp)
+  Class 2 Critical recall: 100.0% correct  ->  100.0% worst corrupted  (+0.0 pp)
+    Class 2 recall holds above 95% in every corrupted condition, because
+    far larger than a 3-sigma offset in the stored statistics.
+    Normal and Warning are separated by about one sigma of temperature
+    and a 3-sigma shift swamps that distinction entirely. Critical is
+
+========================================================================
+ Full A1/B1/B2/D2/E3 numbers: reports/calculations_output.txt
+========================================================================

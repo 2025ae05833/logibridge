@@ -1,0 +1,93 @@
+{
+  "variant": "M3_PRUNED_INT8",
+  "target_sparsity": 0.35,
+  "units_before": 48,
+  "units_after": 31,
+  "units_removed_pct": 35.42,
+  "layer_shapes": {
+    "dense_0": 21,
+    "dense_1": 10
+  },
+  "params_before": 803,
+  "params_after": 400,
+  "params_removed_pct": 50.19,
+  "bytes": 3936,
+  "kb": 3.84,
+  "accuracy_pct": 98.25,
+  "class2_recall_pct": 100.0,
+  "confusion_matrix": [
+    [
+      23,
+      0,
+      0
+    ],
+    [
+      1,
+      16,
+      0
+    ],
+    [
+      0,
+      0,
+      17
+    ]
+  ],
+  "calibration_samples": 234,
+  "sparsity_trace": [
+    {
+      "epoch": 50,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    },
+    {
+      "epoch": 51,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    },
+    {
+      "epoch": 52,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    },
+    {
+      "epoch": 53,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    },
+    {
+      "epoch": 54,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    },
+    {
+      "epoch": 55,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    },
+    {
+      "epoch": 56,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    },
+    {
+      "epoch": 57,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    },
+    {
+      "epoch": 58,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    },
+    {
+      "epoch": 59,
+      "sparsity": 0.35,
+      "val_accuracy": 0.9474
+    }
+  ],
+  "class_names": [
+    "Normal",
+    "Warning",
+    "Critical"
+  ]
+}

@@ -1,0 +1,185 @@
+==============================================================
+ OTA LAYER-CACHE DEMONSTRATION (Task D2)
+==============================================================
+
+>>> STEP 1  build with the M2 INT8 model
+cp training/models/m2_int8.tflite inference/model.tflite
+cd inference && docker build --no-cache -t logibridge-inference:m2 . | tail -25
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.79kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/python:3.11-slim
+#2 DONE 3.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [internal] load build context
+#4 transferring context: 42.15kB done
+#4 DONE 0.1s
+
+#5 [1/9] FROM docker.io/library/python:3.11-slim@sha256:0dd364ba7e10242f07755449e3a3d0e35f9efd987952737b90def6709ab0c5ce
+#5 resolve docker.io/library/python:3.11-slim@sha256:0dd364ba7e10242f07755449e3a3d0e35f9efd987952737b90def6709ab0c5ce 0.1s done
+#5 DONE 0.3s
+
+#5 [1/9] FROM docker.io/library/python:3.11-slim@sha256:0dd364ba7e10242f07755449e3a3d0e35f9efd987952737b90def6709ab0c5ce
+#5 extracting sha256:ecc510c1e359bdc007b39802570bb7e4dec7d6ebccf357c3201a74299113e05e
+#5 extracting sha256:ecc510c1e359bdc007b39802570bb7e4dec7d6ebccf357c3201a74299113e05e 1.2s done
+#5 extracting sha256:0f752a1982d6f819fc2c9e78ac1514c63f2f2e1dec7885ffd4cb6809ba4a26ca
+#5 extracting sha256:0f752a1982d6f819fc2c9e78ac1514c63f2f2e1dec7885ffd4cb6809ba4a26ca 0.2s done
+#5 DONE 1.8s
+
+#5 [1/9] FROM docker.io/library/python:3.11-slim@sha256:0dd364ba7e10242f07755449e3a3d0e35f9efd987952737b90def6709ab0c5ce
+#5 extracting sha256:759a7f30c31818dda4c97b407b24d93da479c306568d185ced927e1a749164f1
+#5 extracting sha256:759a7f30c31818dda4c97b407b24d93da479c306568d185ced927e1a749164f1 done
+#5 DONE 1.3s
+
+#5 [1/9] FROM docker.io/library/python:3.11-slim@sha256:0dd364ba7e10242f07755449e3a3d0e35f9efd987952737b90def6709ab0c5ce
+#5 extracting sha256:496c1a902b3a93cea3e54b90b79dbcaa0e58ad90c3fe9dd0a43c9557dc47f17d 0.0s done
+#5 DONE 1.3s
+
+#6 [2/9] WORKDIR /app
+#6 DONE 0.3s
+
+#7 [3/9] COPY requirements.txt /app/requirements.txt
+#7 DONE 0.1s
+
+#8 [4/9] RUN pip install --no-cache-dir -r /app/requirements.txt
+#8 2.062 Collecting tflite-runtime==2.14.0 (from -r /app/requirements.txt (line 7))
+#8 2.111   Downloading tflite_runtime-2.14.0-cp311-cp311-manylinux2014_x86_64.whl.metadata (1.4 kB)
+#8 2.432 Collecting numpy==1.26.4 (from -r /app/requirements.txt (line 8))
+#8 2.446   Downloading numpy-1.26.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+#8 2.462      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 61.0/61.0 kB 4.5 MB/s eta 0:00:00
+#8 2.496 Collecting paho-mqtt==2.1.0 (from -r /app/requirements.txt (line 9))
+#8 2.507   Downloading paho_mqtt-2.1.0-py3-none-any.whl.metadata (23 kB)
+#8 2.533 Downloading tflite_runtime-2.14.0-cp311-cp311-manylinux2014_x86_64.whl (2.4 MB)
+#8 2.778    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.4/2.4 MB 10.1 MB/s eta 0:00:00
+#8 2.787 Downloading numpy-1.26.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.3 MB)
+#8 3.972    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.3/18.3 MB 16.0 MB/s eta 0:00:00
+#8 3.978 Downloading paho_mqtt-2.1.0-py3-none-any.whl (67 kB)
+#8 3.985    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 67.2/67.2 kB 22.1 MB/s eta 0:00:00
+#8 4.120 Installing collected packages: paho-mqtt, numpy, tflite-runtime
+#8 6.112 Successfully installed numpy-1.26.4 paho-mqtt-2.1.0 tflite-runtime-2.14.0
+#8 6.112 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#8 6.218 
+#8 6.218 [notice] A new release of pip is available: 24.0 -> 26.2.1
+#8 6.218 [notice] To update, run: pip install --upgrade pip
+#8 DONE 6.5s
+
+#9 [5/9] COPY preprocessing.py /app/preprocessing.py
+#9 DONE 0.1s
+
+#10 [6/9] COPY simulator.py /app/simulator.py
+#10 DONE 0.1s
+
+#11 [7/9] COPY inference_service.py /app/inference_service.py
+#11 DONE 0.1s
+
+#12 [8/9] COPY training_stats.npy /app/training_stats.npy
+#12 DONE 0.1s
+
+#13 [9/9] COPY model.tflite /app/model.tflite
+#13 DONE 0.2s
+
+#14 exporting to image
+#14 exporting layers
+#14 exporting layers 3.9s done
+#14 exporting manifest sha256:94c8dc7332b72032944188ce4037a68b7e9bf37f740ed926b0b551ea686a5798 0.0s done
+#14 exporting config sha256:73463f2f94c6f0f020e88d5f95ff87c30a820a4b8f2d1156a3d11e7e613df0ea 0.0s done
+#14 exporting attestation manifest sha256:3d884bfbc5c53e8fe6f867770058a23364ce3a4712a068ff6d5a634b4b4e6fa5
+#14 exporting attestation manifest sha256:3d884bfbc5c53e8fe6f867770058a23364ce3a4712a068ff6d5a634b4b4e6fa5 0.0s done
+#14 exporting manifest list sha256:9c4e222c4a6703aaa6363b1d357b3f8549a5a38050b4c010f6c7a527b5f35049 0.0s done
+#14 naming to docker.io/library/logibridge-inference:m2 0.0s done
+#14 unpacking to docker.io/library/logibridge-inference:m2
+#14 unpacking to docker.io/library/logibridge-inference:m2 1.4s done
+#14 DONE 5.6s
+
+>>> STEP 2  swap ONLY the model file (M2 -> M3) and rebuild
+cp training/models/m3_pruned_int8.tflite inference/model.tflite
+cd inference && docker build -t logibridge-inference:m3 . | tail -25
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.79kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.11-slim
+#2 DONE 0.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 4.16kB done
+#4 DONE 0.0s
+
+#5 [1/9] FROM docker.io/library/python:3.11-slim@sha256:0dd364ba7e10242f07755449e3a3d0e35f9efd987952737b90def6709ab0c5ce
+#5 resolve docker.io/library/python:3.11-slim@sha256:0dd364ba7e10242f07755449e3a3d0e35f9efd987952737b90def6709ab0c5ce 0.1s done
+#5 DONE 0.1s
+
+#6 [6/9] COPY simulator.py /app/simulator.py
+#6 CACHED
+
+#7 [7/9] COPY inference_service.py /app/inference_service.py
+#7 CACHED
+
+#8 [2/9] WORKDIR /app
+#8 CACHED
+
+#9 [3/9] COPY requirements.txt /app/requirements.txt
+#9 CACHED
+
+#10 [4/9] RUN pip install --no-cache-dir -r /app/requirements.txt
+#10 CACHED
+
+#11 [5/9] COPY preprocessing.py /app/preprocessing.py
+#11 CACHED
+
+#12 [8/9] COPY training_stats.npy /app/training_stats.npy
+#12 CACHED
+
+#13 [9/9] COPY model.tflite /app/model.tflite
+#13 DONE 0.2s
+
+#14 exporting to image
+#14 exporting layers
+#14 exporting layers 0.2s done
+#14 exporting manifest sha256:5aaf9b33d55cef66d1f6457304f8daefbfd88cced3d17d3adc2a910eee8ea677 0.0s done
+#14 exporting config sha256:28e392a227799d83eb744516eea873f1df81f2d548cfd21f2d02731b87eef481 0.1s done
+#14 exporting attestation manifest sha256:5ce452ae2794a580aed4964e27845d9d162aa9540ee093993308c24b6e85a753 0.0s done
+#14 exporting manifest list sha256:4a111d84ccbde08f5c79582109a6bd1bc3bd3fe16afe0f3e38f3c46fba735deb 0.0s done
+#14 naming to docker.io/library/logibridge-inference:m3
+#14 naming to docker.io/library/logibridge-inference:m3 done
+#14 unpacking to docker.io/library/logibridge-inference:m3 0.1s done
+#14 DONE 0.6s
+
+>>> Every step up to and including the pip install should read
+    CACHED. Only the final COPY model.tflite re-executes.
+
+>>> STEP 3  layer sizes
+docker history logibridge-inference:m3 --format "table {{.Size}}\t{{.CreatedBy}}" | head -12
+SIZE      CREATED BY
+0B        CMD ["python" "inference_service.py"]
+0B        HEALTHCHECK {Test:[CMD-SHELL python -c "impo…
+0B        VOLUME [/app/data]
+0B        ENV MODEL_PATH=/app/model.tflite STATS_PATH=…
+12.3kB    COPY model.tflite /app/model.tflite # buildk…
+12.3kB    COPY training_stats.npy /app/training_stats.…
+20.5kB    COPY inference_service.py /app/inference_ser…
+24.6kB    COPY simulator.py /app/simulator.py # buildk…
+24.6kB    COPY preprocessing.py /app/preprocessing.py …
+89.6MB    RUN /bin/sh -c pip install --no-cache-dir -r…
+12.3kB    COPY requirements.txt /app/requirements.txt …
+
+>>> STEP 4  bandwidth arithmetic for the 85-truck pilot
+  full image per truck :   188.000 MB
+  model layer per truck:  0.003936 MB
+  fleet full image     :   15980.0 MB  = Rs  1598.00
+  fleet model layer    :    0.3346 MB  = Rs   0.0335
+  saved                :   15979.7 MB  = Rs  1597.97
+  reduction factor     :     47764x

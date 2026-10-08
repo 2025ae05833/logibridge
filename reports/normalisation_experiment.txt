@@ -1,0 +1,38 @@
+Normalisation sensitivity -- 57 held-out validation windows
+model: m2_int8.tflite
+
+condition         accuracy    delta   recall N  recall W  recall C
+------------------------------------------------------------------
+correct             96.49%   +0.00      91.3%    100.0%    100.0%
+mean +3 sigma       91.23%   -5.26     100.0%     70.6%    100.0%
+mean -3 sigma       94.74%   -1.75      87.0%    100.0%    100.0%
+std x3              94.74%   -1.75      95.7%     88.2%    100.0%
+
+==================================================================
+Worst corrupted condition: mean +3 sigma at 91.23% accuracy, -5.26 pp
+Class 1 Warning  recall: 100.0% correct  ->   70.6% worst corrupted  (-29.4 pp)
+Class 2 Critical recall: 100.0% correct  ->  100.0% worst corrupted  (+0.0 pp)
+
+INTERPRETATION
+  Class 2 recall holds above 95% in every corrupted condition, because
+  the vibration signature separating Critical from the other classes is
+  far larger than a 3-sigma offset in the stored statistics.
+
+  The damage lands somewhere less obvious and arguably worse. It
+  concentrates on Class 1 Warning, whose recall falls to 70.6%, because
+  Normal and Warning are separated by about one sigma of temperature
+  and a 3-sigma shift swamps that distinction entirely. Critical is
+  still caught; the early warning that would have let the driver
+  intervene within the 2-hour window is not.
+
+  So a corrupted statistics file does not blind the system to
+  catastrophe. It blinds the system to the signal that would have
+  prevented the catastrophe, while accuracy still reads above 91% and
+  nothing in the logs looks wrong. That is the harder failure to
+  notice in production, and it is the argument for treating
+  training_stats.npy as a versioned, checksummed deployment artefact.
+
+  Either way the experiment makes the operational point: the statistics
+  file is a deployment artefact with the same safety weight as the model
+  itself. The Ansible playbook ships it, it is version-controlled with
+  the model, and nothing in the runtime path recomputes it.

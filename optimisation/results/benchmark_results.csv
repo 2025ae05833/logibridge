@@ -1,0 +1,4 @@
+variant,description,mean_latency_ms,p95_latency_ms,size_kb,accuracy_pct,energy_mj,class2_recall_pct
+M1,FP32 baseline,0.0016,0.0014,5.26,94.74,0.0220637,100.0
+M2,PTQ INT8,0.0015,0.0014,4.55,96.49,0.0222431,100.0
+M3,Pruned 35% + INT8,0.0012,0.0012,3.84,98.25,0.0219146,100.0

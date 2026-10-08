@@ -1,0 +1,11 @@
+Two results print to the terminal and are never written to a file.
+Capture them before writing Sections 3 and 5:
+ 
+  sudo rm -rf /opt/logibridge && docker rm -f logibridge-inference 2>/dev/null
+  make deploy   2>&1 | tee reports/evidence/05_ansible_idempotency.txt
+  make ota-demo 2>&1 | tee reports/evidence/06_ota_layer_cache.txt
+  make reference
+ 
+From 05: the two PLAY RECAP lines (changed=N, then changed=0)
+From 06: the CACHED lines, the COPY model.tflite line that is NOT cached,
+         docker history sizes, and the 85-truck bandwidth arithmetic

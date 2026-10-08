@@ -1,0 +1,339 @@
+LogiEdge -- Report Calculations
+BITS Pilani WILP | AIML ZG535 Machine Learning on Edge | Group 18
+
+==========================================================================
+TASK A1 (a) -- LATENCY: is cloud inference feasible?
+==========================================================================
+Requirement: detect and alert within 90 s of a fault signature.
+Cargo warms at 1 C/min once the unit fails, so the
+SLA permits roughly 1.5 C of excursion before an alert must exist.
+
+leg                                             best (s)    worst (s)
+sensor -> edge node (local I2C/SPI)                0.005        0.020
+edge node -> cell tower (RAN, rural 4G)            0.060        0.250
+tower -> cloud region (backhaul, Mumbai)           0.030        0.080
+cloud inference + queueing                         0.050        0.200
+cloud -> ops centre -> truck ack                   0.090        0.330
+---------------------------------------------------------------------
+cloud round trip                                   0.235        0.880
+
+In isolation even the worst case (0.88 s) fits inside 90 s,
+so a naive reading says cloud inference is feasible. It is not, for two
+reasons that latency arithmetic alone does not capture:
+
+  1. AVAILABILITY, NOT LATENCY, IS THE BINDING CONSTRAINT. The round trip
+     is only defined when a link exists. On the Nashik-Aurangabad route
+     the link is absent for 35-90 minutes at seven locations, during
+     which cloud round-trip latency is not 0.88 s but unbounded.
+  2. A 90-minute outage at 1 C/min permits a 90 C excursion.
+     That is total cargo loss for vaccines with a 2-8 C envelope.
+
+Edge inference removes the network from the detection path entirely:
+sensor -> edge node -> inference is 5-20 ms and has no dependency on
+cellular coverage. The uplink then carries alerts, not decisions.
+
+==========================================================================
+TASK A1 (b) -- BANDWIDTH: raw telemetry vs edge-processed alerts
+==========================================================================
+Assumption: 4-byte float per sample, packed binary frames (not JSON).
+
+stream                             samples/day       bytes/day     MB/day
+temperature 1 Hz                        86,400         345,600      0.346
+vibration 500 Hz x 3 axes          129,600,000     518,400,000    518.400
+door events (discrete)                      20           1,000      0.001
+-------------------------------------------------------------------------
+RAW TOTAL per truck per day                        518,746,600    518.747
+
+Vibration is 99.93% of the raw volume. Any bandwidth argument
+for this deployment is a vibration argument.
+
+Edge-processed uplink (alerts and health only):
+  inferences/day (10 s step)                         8,640
+  alerts/day at 1% non-Normal                           86  x 300 B
+  heartbeats/day (5 min)                               288  x 200 B
+  daily health summary                                   1  x 50,000 B
+  EDGE TOTAL per truck per day                     133,520 B = 0.1335 MB
+
+Reduction factor: 3,885x
+
+COST AT Rs 0.10/MB                       raw (cloud)          edge         saved
+per truck/day                               Rs 51.87       Rs 0.01      Rs 51.86
+pilot 85 trucks/day                      Rs 4,409.35       Rs 1.13   Rs 4,408.21
+pilot 85 trucks/YEAR                    Rs 1,609,411        Rs 414  Rs 1,608,997
+full 265 trucks/YEAR                    Rs 5,017,576      Rs 1,291  Rs 5,016,285
+
+At full fleet the edge architecture saves Rs 50.2 lakh per year in
+cellular data alone -- before counting a single prevented spoilage event.
+
+NOTE ON THE TWO VIBRATION RATES
+Task A1 specifies vibration at 500 Hz on 3 axes; Task C1 specifies a
+vibration_rms stream at 0.5 Hz. These describe different points in the
+same chain: 500 Hz x 3 is the raw accelerometer, and the 0.5 Hz stream is
+the RMS computed from it on the sensor node. The bandwidth case above
+uses the raw rate because that is what a cloud architecture would have to
+ship; the simulator and model use the RMS stream because that is what
+crosses the wire in the edge architecture. Computing RMS at the sensor is
+itself the first and largest data reduction in the pipeline:
+  raw vibration     518.400 MB/day
+  RMS at 0.5 Hz       0.173 MB/day   (3,000x reduction, on-sensor)
+
+==========================================================================
+TASK A1 (c) -- CONNECTIVITY: behaviour in the seven dead zones
+==========================================================================
+Nashik-Aurangabad: 7 documented outages of 35-90 minutes.
+
+                                          cloud-only           LogiEdge edge
+sensing                                    continues               continues
+inference                                      STOPS      continues on-truck
+detection of a fault                            NONE             within 90 s
+alert to driver/buzzer                          NONE        immediate, local
+alert to ops centre                             NONE    queued, synced later
+chain-of-custody record                          GAP     complete, local log
+
+Worst-case exposure on one run: 7 x 90 min = 630 min = 10.5 h unmonitored.
+
+What a failed unit does inside a single 90-minute gap, at 1 C/min:
+  leaves the 2-8 C vaccine envelope after 4 min
+  reaches cabin ambient after about 31 min, and then stops
+  rising -- the cargo asymptotes to ambient (35-42 C in a
+  Maharashtra summer), it does not climb without limit
+
+So the honest statement is not a large temperature number but a timing
+one: the envelope is breached 86 minutes before the
+truck regains signal, and the cargo then sits above it for the rest of the
+gap. Under a cloud-only architecture nobody learns this until the link
+returns, by which point the consignment is already lost. That is the exact
+failure mode of the Rs 28 lakh Nashik-Aurangabad incident.
+
+How LogiEdge handles it:
+  - the MQTT broker is on the truck, so publish/subscribe never leaves it
+  - inference reads from that local broker; no cloud call exists in the path
+  - alerts append to a local JSONL log with fsync before any network attempt
+  - each record carries synced=false until the ops centre acknowledges it
+  - on reconnection the uplink replays unsynced records in timestamp order
+  Losing the uplink costs visibility at the ops centre, never detection.
+
+Reconnection burst after a 90-minute gap with an active fault:
+  ~162 queued alerts x 300 B = 48.6 KB (~Rs 0.005)
+  Trivial to transmit: the queue drains in well under a second.
+
+==========================================================================
+TASK A1 (d) -- PRIVACY: what on-device inference lets FreightBridge promise
+==========================================================================
+The pharmaceutical clients' requirement is contractual, not merely
+technical: they need to warrant that cargo condition data cannot be
+reached by unauthorised third parties. On-device inference changes what
+can honestly be written into that contract.
+
+  1. DATA MINIMISATION AS AN ARCHITECTURAL FACT. Raw telemetry never
+     leaves the vehicle; only classifications and alerts do. A party who
+     intercepts the uplink obtains 'TRK-014 reported Warning at 14:22',
+     not a reconstructable thermal history of a named consignment.
+  2. A SMALLER ATTACK SURFACE, STATED CONCRETELY. Cloud inference exposes
+     every reading at the RAN, the backhaul, the ingest endpoint, the
+     queue and the datastore. Edge inference reduces that to one hop
+     carrying already-aggregated records.
+  3. NO THIRD-PARTY PROCESSOR IN THE DATA PATH. Under India's DPDP Act
+     2023 a cloud vendor processing client cargo data is a data processor
+     requiring its own contractual chain. On-device inference keeps
+     processing on FreightBridge-owned hardware, so that chain is shorter
+     and auditable.
+  4. TENANT ISOLATION BY CONSTRUCTION. Each truck processes only its own
+     cargo. There is no shared multi-tenant store in which one client's
+     consignment data sits beside a competitor's.
+  5. AN AUDITABLE CUSTODY RECORD. The local append-only log is the
+     chain-of-custody artefact whose absence caused the rejected hospital
+     shipment. It is produced on the truck and survives connectivity loss.
+
+  Honest limit: 'cannot be accessed' is a claim about the whole system,
+  not about inference location. On-device inference is necessary but not
+  sufficient -- it must be paired with disk encryption on the edge node,
+  TLS with client certificates on the uplink, signed model artefacts, and
+  physical tamper-evidence on the enclosure. The report states this rather
+  than implying edge inference alone discharges the obligation.
+
+==========================================================================
+TASK B1 -- HARDWARE COST AND POWER (Constraint Triangle inputs)
+==========================================================================
+Power budget: 10 W AI budget from a 12 V truck supply via DC-DC converter.
+
+option                                      Rs/truck   TDP W    GOPS     pilot Rs      fleet Rs
+-----------------------------------------------------------------------------------------------
+1  Pi 5 8GB + AI HAT+ (13 TOPS Hailo-8L)      15,000     7.5    13.0    1,275,000     3,975,000
+2  Jetson Orin Nano Super (67 TOPS)           45,000    15.0    67.0    3,825,000    11,925,000
+3  STM32H7 custom MCU + sensor ICs             3,500     0.4     0.0      297,500       927,500
+
+Power budget check against 10 W:
+  1  Pi 5 8GB + AI HAT+ (13 TOPS Hailo-8L)     7.5 W   FITS
+  2  Jetson Orin Nano Super (67 TOPS)         15.0 W   EXCEEDS BUDGET
+  3  STM32H7 custom MCU + sensor ICs           0.4 W   FITS
+
+Fleet-scale cost delta against Option 1:
+  2  Jetson Orin Nano Super (67 TOPS)          Rs +7,950,000  (79.5 lakh more)
+  3  STM32H7 custom MCU + sensor ICs           Rs -3,047,500  (30.5 lakh less)
+
+DOMINANT CONSTRAINT VERTEX: COST, with POWER as a hard feasibility gate.
+  Option 2 is eliminated before cost is even considered: at 15 W under
+  moderate load it exceeds the 10 W budget, and its 67 TOPS is spent on
+  a 6-feature MLP measured at roughly one microsecond per inference. It
+  also costs Rs 79.5 lakh more across the fleet for capability the
+  workload cannot use.
+
+  Option 3 is the most tempting on the two vertices the triangle usually
+  rewards -- Rs 3,500 and 0.4 W -- and it is still wrong, for a reason
+  that is not about inference at all. An 803-parameter INT8 MLP would run
+  perfectly well on an STM32H7 via TFLite Micro. What it cannot run is
+  Components D and E of this system: Docker containerisation, the
+  layer-cached OTA path, the Ansible-managed deployment, and a local MQTT
+  broker. Choosing Option 3 means rebuilding the entire MLOps story as
+  bespoke firmware with a custom bootloader and a custom update protocol
+  -- across 265 vehicles, with no rollback story in a connectivity dead
+  zone. The Rs 30.5 lakh saved on hardware is spent several times over on
+  firmware engineering and fleet-management risk.
+
+  RECOMMENDATION: Option 1, Raspberry Pi 5 + AI HAT+.
+    - 7.5 W fits the 10 W budget with 2.5 W of headroom
+    - Rs 39.8 lakh at full fleet, Rs 79.5 lakh below Option 2
+    - runs a full Linux userspace, so Docker, Ansible and Mosquitto work
+      as deployed everywhere else, not as a bespoke embedded variant
+    - the Hailo-8L is headroom, not need: it leaves room to add the
+      vision-based load-integrity model the operations director will ask
+      for once the pilot succeeds, without a second hardware refresh
+    - 90 s SLA: measured inference is ~1 us, roughly 8 orders of
+      magnitude inside budget. Latency does not discriminate between
+      these options, which is precisely why cost and manageability decide.
+
+==========================================================================
+TASK B2 -- ARITHMETIC INTENSITY AND ROOFLINE (Raspberry Pi 5 CPU)
+==========================================================================
+Given:
+  work per inference              45.0 MFLOP
+  data moved per inference        18.0 MB
+  peak compute                    16.0 GFLOP/s  (NEON SIMD)
+  peak bandwidth                  12.0 GB/s     (LPDDR4X)
+
+Arithmetic Intensity  AI = FLOPs / Bytes
+                         = 45,000,000 / 18,000,000
+                         = 2.500 FLOP/byte
+
+Ridge point           I_ridge = Peak compute / Peak bandwidth
+                              = 16e9 / 12e9
+                              = 1.333 FLOP/byte
+
+AI (2.500) > ridge (1.333)  ->  COMPUTE-BOUND
+The operating point sits on the flat (compute) roof of the model.
+
+Attainable performance = min(peak, AI x BW)
+                       = min(16, 2.500 x 12 = 30.0) = 16.0 GFLOP/s
+
+Cross-check by time:
+  compute time = 45,000,000 / 16,000,000,000 = 2.812 ms
+  memory time  = 18,000,000 / 12,000,000,000 = 1.500 ms
+  compute time is 1.88x the memory time, so compute
+  dominates and the classification above is confirmed.
+
+WHAT THE ROOFLINE SAYS TO OPTIMISE
+  On the compute roof, latency falls only by reducing arithmetic or by
+  raising effective throughput. Therefore:
+    DO    quantise to INT8 -- NEON's SDOT/UDOT execute four int8 MACs
+          per lane-slot, lifting the compute roof itself
+    DO    prune structurally -- removes MACs outright, unlike
+          unstructured sparsity which leaves the MAC count unchanged
+    DO    offload to the Hailo-8L on the AI HAT+ (13 TOPS), which
+          replaces the 16 GFLOP/s roof with a far higher integer one
+    DON'T spend effort on data layout, tiling, prefetch or cache
+          blocking -- those raise the slanted bandwidth roof, and this
+          model is not on it. They would buy nothing.
+
+HONESTY NOTE
+  The figures above are the ones the problem statement supplies and the
+  analysis uses them as given. They do not describe the model actually
+  built here: our MLP has 803 parameters and performs roughly 1.6 kFLOP
+  per inference against a few kilobytes of weights -- about four orders
+  of magnitude below the stated figures. Measured latency is ~1 us, not
+  the 2.8 ms the stated figures imply. For a model this small the
+  Roofline is the wrong instrument entirely: runtime is dominated by
+  interpreter invocation overhead, not by arithmetic or by memory
+  traffic, which is exactly what the benchmark in Task F2 measured when
+  removing 50% of the parameters changed latency by nothing.
+
+==========================================================================
+TASK D2 -- DOCKER LAYER CACHE: bandwidth saved across 85 trucks
+==========================================================================
+Image layers (compressed transfer sizes):
+  1 base  python:3.11-slim              130.00 MB
+  2 deps  pip install -r reqs            58.00 MB
+  3 code  app + training_stats.npy      0.0400 MB
+  4 model model.tflite                 0.00455 MB
+  --------------------------------------------
+  full image                            188.04 MB
+
+A model-only change invalidates layer 4 alone, because every pip
+install sits above it in the Dockerfile. Layers 1-3 are already on
+the truck and are not retransmitted.
+
+per truck                         full image: 188.0 MB     cached: 0.0046 MB
+pilot 85 trucks                full image: 15,983.8 MB     cached: 0.3868 MB
+full fleet 265 trucks          full image: 49,831.8 MB     cached: 1.2058 MB
+
+For the 85-truck pilot, one model update:
+  without layer caching :     15,983.8 MB  = Rs   1,598.38
+  with layer caching    :       0.3868 MB  = Rs       0.04
+  saved                 :     15,983.4 MB  = Rs   1,598.34
+  reduction factor      :       41,328x
+
+At one update every 6 weeks (8.7 cycles/year), layer ordering
+alone saves Rs 13,890/year on the pilot fleet and Rs 43,305/year at full scale.
+
+This is the entire reason the problem statement requires pip install
+layers before COPY model.tflite. Reversing those two instructions
+multiplies every model update by 41,328.
+
+==========================================================================
+TASK E3 -- OTA STRATEGY: full replacement vs canary vs shadow
+==========================================================================
+Model 280 KB = 0.280 MB | 85 trucks | Rs 0.10/MB | every 6 weeks
+
+strategy                  MB/cycle    Rs/cycle     Rs/year    blast radius
+--------------------------------------------------------------------------
+full replacement             23.80        2.38       20.63          all 85
+canary (10 first)            23.80        2.38       20.63      10 then 75
+shadow mode                  85.49        8.55       74.09    0 (advisory)
+
+Canary abort case: only 10 trucks have pulled the model, so an
+aborted rollout costs 2.80 MB = Rs 0.28 instead of Rs 2.38.
+Shadow telemetry assumes 2% disagreement uploaded over 14 days:
+  61.7 MB on top of the model, i.e. 3.6x the full-replacement volume.
+
+RECOMMENDATION: CANARY
+  On cost the three are not meaningfully separated -- Rs 2.38 versus Rs 2.38
+  versus Rs 8.55 per cycle is noise against a Rs 28 lakh spoilage event. The
+  decision is therefore about risk, and canary wins on three specifics:
+
+  1. SAFETY-CRITICALITY BOUNDS THE BLAST RADIUS. A regression in Class 2
+     recall means undetected spoilage. Canary exposes 10 trucks to that
+     risk for one validation window instead of 85 at once.
+  2. RURAL CONNECTIVITY MAKES ROLLBACK SLOW. A truck in one of the seven
+     dead zones cannot be reached for up to 90 minutes. Under full
+     replacement a bad model is already on all 85 trucks and some of
+     them are unreachable; the fleet cannot be recalled on demand.
+  3. VALIDATION IS CHEAP AND DIRECT. Ten trucks running the new model for
+     one week produce real Class 2 recall on real routes, which is the
+     metric Task F3 gates deployment on.
+
+  AGAINST FULL REPLACEMENT: no validation stage at all. It deploys an
+  unproven model simultaneously to every vehicle carrying temperature-
+  sensitive pharmaceuticals, with a slow and partial rollback path.
+
+  AGAINST SHADOW MODE: it is the technically safest option and still the
+  wrong choice here. It requires both models resident and both executed
+  per window, roughly doubling inference work and memory on a 7.5 W node;
+  it costs 3.6x the bandwidth; and it delays every rollout by the
+  14-day comparison window. That overhead is justified for a model whose
+  failure modes are unknown. For an 803-parameter MLP whose decision
+  boundary is six interpretable features, canary validation on real
+  routes answers the same question at a fraction of the cost.
+
+==========================================================================
+End of calculations.
+==========================================================================

@@ -1,0 +1,56 @@
+{
+  "m1_fp32": {
+    "bytes": 5388,
+    "kb": 5.26,
+    "accuracy_pct": 94.74,
+    "class2_recall_pct": 100.0,
+    "confusion_matrix": [
+      [
+        21,
+        2,
+        0
+      ],
+      [
+        1,
+        16,
+        0
+      ],
+      [
+        0,
+        0,
+        17
+      ]
+    ]
+  },
+  "m2_int8": {
+    "bytes": 4664,
+    "kb": 4.55,
+    "accuracy_pct": 96.49,
+    "class2_recall_pct": 100.0,
+    "confusion_matrix": [
+      [
+        21,
+        2,
+        0
+      ],
+      [
+        0,
+        17,
+        0
+      ],
+      [
+        0,
+        0,
+        17
+      ]
+    ],
+    "calibration_samples": 234
+  },
+  "compression_ratio": 1.155,
+  "agreement_pct": 98.25,
+  "class_names": [
+    "Normal",
+    "Warning",
+    "Critical"
+  ]
+}

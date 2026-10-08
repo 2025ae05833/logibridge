@@ -1,0 +1,67 @@
+{
+  "variant": "M1_FP32",
+  "architecture": "Dense(32,relu) -> Dense(16,relu) -> Dense(3,softmax)",
+  "parameters": 803,
+  "epochs_run": 36,
+  "random_split": {
+    "accuracy_pct": 94.74,
+    "confusion_matrix": [
+      [
+        21,
+        2,
+        0
+      ],
+      [
+        1,
+        16,
+        0
+      ],
+      [
+        0,
+        0,
+        17
+      ]
+    ],
+    "recall_pct": [
+      91.3,
+      94.12,
+      100.0
+    ],
+    "class2_recall_pct": 100.0,
+    "n_val": 57
+  },
+  "blocked_split": {
+    "accuracy_pct": 100.0,
+    "confusion_matrix": [
+      [
+        24,
+        0,
+        0
+      ],
+      [
+        0,
+        18,
+        0
+      ],
+      [
+        0,
+        0,
+        18
+      ]
+    ],
+    "recall_pct": [
+      100.0,
+      100.0,
+      100.0
+    ],
+    "class2_recall_pct": 100.0,
+    "n_val": 60
+  },
+  "class_names": [
+    "Normal",
+    "Warning",
+    "Critical"
+  ],
+  "gate_pct": 88.0,
+  "gate_passed": true
+}

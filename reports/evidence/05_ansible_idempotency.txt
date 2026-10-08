@@ -1,0 +1,69 @@
+>>> RUN 1 (expect changed>0 on a fresh target)
+cd deployment && ansible-playbook -i inventory.ini logibridge_deploy.yml
+
+PLAY [Deploy the LogiEdge inference stack to a cold-chain truck] ***************
+
+TASK [Create the LogiEdge directory if not present] ****************************
+[WARNING]: Platform linux on host TRK-001 is using the discovered Python
+interpreter at /home/ravi_nayak/logibridge/.venv/bin/python3.10, but future
+installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+changed: [TRK-001]
+
+TASK [Copy the new model file to the truck] ************************************
+changed: [TRK-001]
+
+TASK [Copy the updated PSI reference distribution] *****************************
+changed: [TRK-001]
+
+TASK [Stop the running inference container if an update arrived] ***************
+changed: [TRK-001]
+
+TASK [Pull the updated container image from the local registry] ****************
+ok: [TRK-001]
+
+TASK [Start the inference container with its environment] **********************
+changed: [TRK-001]
+
+TASK [Wait 15 seconds and verify the container is running] *********************
+ok: [TRK-001]
+
+PLAY RECAP *********************************************************************
+TRK-001                    : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+>>> RUN 2 (expect changed=0 -- this is the idempotency proof)
+cd deployment && ansible-playbook -i inventory.ini logibridge_deploy.yml
+
+PLAY [Deploy the LogiEdge inference stack to a cold-chain truck] ***************
+
+TASK [Create the LogiEdge directory if not present] ****************************
+[WARNING]: Platform linux on host TRK-001 is using the discovered Python
+interpreter at /home/ravi_nayak/logibridge/.venv/bin/python3.10, but future
+installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [TRK-001]
+
+TASK [Copy the new model file to the truck] ************************************
+ok: [TRK-001]
+
+TASK [Copy the updated PSI reference distribution] *****************************
+ok: [TRK-001]
+
+TASK [Stop the running inference container if an update arrived] ***************
+skipping: [TRK-001]
+
+TASK [Pull the updated container image from the local registry] ****************
+ok: [TRK-001]
+
+TASK [Start the inference container with its environment] **********************
+ok: [TRK-001]
+
+TASK [Wait 15 seconds and verify the container is running] *********************
+ok: [TRK-001]
+
+PLAY RECAP *********************************************************************
+TRK-001                    : ok=6    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+

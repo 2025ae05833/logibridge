@@ -1,0 +1,132 @@
+---
+# LogiEdge -- OTA deployment playbook  (Task E2)
+#
+# Exactly seven tasks, in the order the problem statement specifies.
+#
+# HOW IDEMPOTENCY IS ACHIEVED
+# ---------------------------
+# Running this twice with no changes in between must report changed=0. Three
+# of the seven tasks are imperative by nature -- stopping a container, pulling
+# an image, starting a container -- and a naive playbook reports them changed
+# on every single run.
+#
+# The fix is to let the two copy tasks decide. Ansible's copy module compares
+# checksums and reports changed only when the file on the target actually
+# differs, so registering those results gives a reliable "did anything
+# actually arrive?" signal. The stop task is then gated on it and is skipped
+# on a no-op run. The start task is declarative: community.docker's
+# docker_container converges to the described state, so when the container is
+# already running with the same image, environment and mounts, it reports ok
+# rather than changed. The final verification task is a read, so it is marked
+# changed_when: false -- checking something is not changing it.
+#
+# The model is bind-mounted from /opt/logibridge rather than baked into the
+# image. That is what makes MODEL_PATH a real switch: swapping M1, M2 or M3
+# on a truck is a file copy and a restart, with no image rebuild and no
+# container image crossing the cellular link.
+#
+# Requires:  ansible-galaxy collection install community.docker
+# Run:       ansible-playbook -i inventory.ini logibridge_deploy.yml
+# Check:     ansible-playbook -i inventory.ini logibridge_deploy.yml --check
+
+- name: Deploy the LogiEdge inference stack to a cold-chain truck
+  hosts: trucks
+  gather_facts: false
+
+  # Privilege escalation is required because the problem statement mandates
+  # /opt/logibridge as the deployment directory, and /opt is root-owned. On a
+  # real truck the controller connects as a dedicated service account whose
+  # sudoers entry is scoped to exactly the commands below; for the pilot demo
+  # the local user escalates with sudo.
+  become: true
+
+
+  vars:
+    logibridge_dir: /opt/logibridge
+    container_name: logibridge-inference
+    registry: "{{ local_registry | default('localhost:5000') }}"
+    image: "{{ registry }}/logibridge-inference:{{ image_tag | default('latest') }}"
+    model_src: "../training/models/m2_int8.tflite"
+    reference_src: "../monitoring/reference_dist.json"
+    truck_id: "{{ inventory_hostname }}"
+    mqtt_host: "{{ broker_host | default('localhost') }}"
+    mqtt_port: 1883
+
+  tasks:
+    # ---------------------------------------------------------------- 1
+    - name: Create the LogiEdge directory if not present
+      ansible.builtin.file:
+        path: "{{ logibridge_dir }}"
+        state: directory
+        mode: "0755"
+
+    # ---------------------------------------------------------------- 2
+    - name: Copy the new model file to the truck
+      ansible.builtin.copy:
+        src: "{{ model_src }}"
+        dest: "{{ logibridge_dir }}/model.tflite"
+        mode: "0644"
+      register: model_copy
+
+    # ---------------------------------------------------------------- 3
+    - name: Copy the updated PSI reference distribution
+      ansible.builtin.copy:
+        src: "{{ reference_src }}"
+        dest: "{{ logibridge_dir }}/reference_dist.json"
+        mode: "0644"
+      register: reference_copy
+
+    # ---------------------------------------------------------------- 4
+    # Gated on the two copies: with nothing new to deploy there is nothing to
+    # restart for, so this is skipped rather than reported as changed.
+    - name: Stop the running inference container if an update arrived
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ image }}"
+        state: stopped
+      when: model_copy.changed or reference_copy.changed
+
+    # ---------------------------------------------------------------- 5
+    # force_source: false means an image already present locally is not
+    # re-pulled, so this reports changed only when the registry has something
+    # newer. Over an M2M SIM that distinction is the difference between a few
+    # kilobytes and a whole image.
+    - name: Pull the updated container image from the local registry
+      community.docker.docker_image:
+        name: "{{ image }}"
+        source: pull
+        force_source: false
+
+    # ---------------------------------------------------------------- 6
+    # Declarative: converges to this state and reports ok when already there.
+    # MODEL_PATH points into the bind-mounted directory, which is what lets a
+    # variant switch happen without a rebuild.
+    - name: Start the inference container with its environment
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ image }}"
+        state: started
+        restart_policy: unless-stopped
+        network_mode: host
+        volumes:
+          - "{{ logibridge_dir }}:{{ logibridge_dir }}:ro"
+          - "{{ logibridge_dir }}/data:/app/data:rw"
+        env:
+          MODEL_PATH: "{{ logibridge_dir }}/model.tflite"
+          STATS_PATH: "/app/training_stats.npy"
+          TRUCK_ID: "{{ truck_id }}"
+          MQTT_HOST: "{{ mqtt_host }}"
+          MQTT_PORT: "{{ mqtt_port | string }}"
+          ALERT_LOG: "/app/data/alerts.jsonl"
+
+    # ---------------------------------------------------------------- 7
+    # Polls once a second for up to 15 seconds. A read, so changed_when: false.
+    - name: Wait 15 seconds and verify the container is running
+      community.docker.docker_container_info:
+        name: "{{ container_name }}"
+      register: container_state
+      until: container_state.exists and container_state.container.State.Running
+      retries: 15
+      delay: 1
+      changed_when: false
+      failed_when: not (container_state.exists and container_state.container.State.Running)

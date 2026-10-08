@@ -1,0 +1,511 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791357654.182852   48149 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+I0000 00:00:1791357654.236313   48149 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791357655.702601   48149 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+/home/ravi_nayak/logibridge/.venv/lib/python3.10/site-packages/tensorflow/lite/python/interpreter.py:457: UserWarning:     Warning: tf.lite.Interpreter is deprecated and is scheduled for deletion in
+    TF 2.20. Please use the LiteRT interpreter from the ai_edge_litert package.
+    See the [migration guide](https://ai.google.dev/edge/litert/migration)
+    for details.
+    
+  warnings.warn(_INTERPRETER_DELETION_WARNING)
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+[logibridge] model   : /home/ravi_nayak/logibridge/inference/model.tflite (INT8 input, sha e8d8c25fb0c3)
+[logibridge] truck   : TRK-001
+[logibridge] broker  : localhost:1883
+[logibridge] alerts  : /home/ravi_nayak/logibridge/inference/data/alerts.jsonl
+[logibridge] subscribed to logibridge/trucks/TRK-001/#
+[   1] t=   30.0s  Normal   conf=0.590  T= 3.98C roc= +0.85C/min vib=0.440g  0.185ms
+[   2] t=   40.0s  Normal   conf=0.488  T= 4.07C roc= +0.10C/min vib=0.451g  0.208ms
+[   3] t=   50.0s  Normal   conf=0.555  T= 4.07C roc= +0.09C/min vib=0.436g  0.355ms
+[   4] t=   60.0s  Normal   conf=0.492  T= 4.04C roc= -0.83C/min vib=0.441g  0.239ms
+[   5] t=   70.0s  Normal   conf=0.461  T= 3.95C roc= -0.11C/min vib=0.484g  0.114ms
+[   6] t=   80.0s  Normal   conf=0.766  T= 3.99C roc= +0.56C/min vib=0.469g  0.479ms
+[   7] t=   90.0s  Normal   conf=0.492  T= 4.02C roc= +0.11C/min vib=0.461g  0.082ms
+[   8] t=  100.0s  Normal   conf=0.566  T= 4.09C roc= +0.00C/min vib=0.459g  0.204ms
+[   9] t=  110.0s  Normal   conf=0.746  T= 4.00C roc= -0.41C/min vib=0.454g  0.216ms
+[  10] t=  120.0s  Normal   conf=0.547  T= 3.98C roc= -1.08C/min vib=0.451g  0.200ms
+[  11] t=  130.0s  Normal   conf=0.910  T= 3.87C roc= +0.01C/min vib=0.438g  0.201ms
+[  12] t=  140.0s  Normal   conf=0.613  T= 3.89C roc= +0.35C/min vib=0.434g  0.201ms
+[  13] t=  150.0s  Normal   conf=0.707  T= 3.93C roc= +0.41C/min vib=0.444g  0.203ms
+[  14] t=  160.0s  Normal   conf=0.609  T= 4.00C roc= +0.58C/min vib=0.456g  0.208ms
+[  15] t=  170.0s  Normal   conf=0.574  T= 4.14C roc= +1.33C/min vib=0.449g  0.209ms
+[  16] t=  180.0s  Normal   conf=0.574  T= 4.28C roc= +1.63C/min vib=0.446g  0.320ms
+[  17] t=  190.0s  Warning  conf=0.438  T= 4.49C roc= +0.71C/min vib=0.450g  0.202ms
+[  18] t=  200.0s  Warning  conf=0.523  T= 4.63C roc= +0.86C/min vib=0.439g  0.174ms
+[  19] t=  210.0s  Warning  conf=0.547  T= 4.77C roc= +0.80C/min vib=0.444g  0.204ms
+[  20] t=  220.0s  Warning  conf=0.523  T= 4.83C roc= +0.18C/min vib=0.419g  0.202ms
+[  21] t=  230.0s  Normal   conf=0.449  T= 4.87C roc= -0.59C/min vib=0.435g  0.190ms
+[  22] t=  240.0s  Normal   conf=0.461  T= 4.75C roc= -0.35C/min vib=0.456g  0.098ms
+[  23] t=  250.0s  Normal   conf=0.520  T= 4.58C roc= -1.56C/min vib=0.463g  0.220ms
+[  24] t=  260.0s  Warning  conf=0.539  T= 4.36C roc= -1.75C/min vib=0.453g  0.069ms
+[  25] t=  270.0s  Normal   conf=0.461  T= 4.06C roc= -0.88C/min vib=0.459g  0.197ms
+[  26] t=  280.0s  Normal   conf=0.449  T= 4.06C roc= -0.12C/min vib=0.457g  0.198ms
+[  27] t=  290.0s  Normal   conf=0.680  T= 4.04C roc= +0.98C/min vib=0.443g  0.484ms
+[  28] t=  300.0s  Normal   conf=0.516  T= 4.12C roc= +0.39C/min vib=0.443g  0.207ms
+[  29] t=  310.0s  Normal   conf=0.613  T= 4.11C roc= -0.20C/min vib=0.452g  0.094ms
+[  30] t=  320.0s  Normal   conf=0.406  T= 4.05C roc= -0.40C/min vib=0.456g  0.072ms
+[  31] t=  330.0s  Normal   conf=0.828  T= 3.98C roc= -0.28C/min vib=0.431g  0.099ms
+[  32] t=  340.0s  Normal   conf=0.508  T= 3.94C roc= -0.62C/min vib=0.453g  0.110ms
+[  33] t=  350.0s  Normal   conf=0.449  T= 3.90C roc= -0.34C/min vib=0.445g  0.202ms
+[  34] t=  360.0s  Normal   conf=0.664  T= 3.88C roc= -0.49C/min vib=0.456g  0.198ms
+[  35] t=  370.0s  Normal   conf=0.754  T= 3.92C roc= -0.26C/min vib=0.467g  0.204ms
+[  36] t=  380.0s  Normal   conf=0.531  T= 3.91C roc= +0.30C/min vib=0.468g  0.414ms
+[  37] t=  390.0s  Normal   conf=0.844  T= 3.94C roc= +0.36C/min vib=0.477g  0.074ms
+[  38] t=  400.0s  Normal   conf=0.770  T= 3.97C roc= +0.37C/min vib=0.473g  0.216ms
+[  39] t=  410.0s  Normal   conf=0.789  T= 3.96C roc= +0.60C/min vib=0.449g  0.205ms
+[  40] t=  420.0s  Normal   conf=0.719  T= 4.01C roc= -0.34C/min vib=0.434g  0.104ms
+[  41] t=  430.0s  Normal   conf=0.664  T= 3.98C roc= +0.52C/min vib=0.451g  0.207ms
+[  42] t=  440.0s  Normal   conf=0.754  T= 4.04C roc= +0.18C/min vib=0.448g  0.212ms
+[  43] t=  450.0s  Normal   conf=0.492  T= 4.00C roc= -0.24C/min vib=0.441g  0.199ms
+[  44] t=  460.0s  Normal   conf=0.512  T= 4.00C roc= -0.34C/min vib=0.453g  0.203ms
+[  45] t=  470.0s  Normal   conf=0.652  T= 3.89C roc= -0.55C/min vib=0.441g  0.197ms
+[  46] t=  480.0s  Normal   conf=0.539  T= 3.92C roc= -0.65C/min vib=0.429g  0.449ms
+[  47] t=  490.0s  Normal   conf=0.809  T= 3.84C roc= +0.15C/min vib=0.449g  0.098ms
+[  48] t=  500.0s  Normal   conf=0.688  T= 3.93C roc= +0.35C/min vib=0.444g  0.087ms
+[  49] t=  510.0s  Normal   conf=0.719  T= 3.93C roc= +0.64C/min vib=0.434g  0.383ms
+[  50] t=  520.0s  Normal   conf=0.602  T= 3.93C roc= +0.04C/min vib=0.438g  0.193ms
+[  51] t=  530.0s  Normal   conf=0.664  T= 3.98C roc= +0.16C/min vib=0.455g  0.115ms
+[  52] t=  540.0s  Normal   conf=0.609  T= 3.98C roc= +0.16C/min vib=0.451g  0.209ms
+[  53] t=  550.0s  Normal   conf=0.688  T= 3.99C roc= -0.39C/min vib=0.459g  0.296ms
+[  54] t=  560.0s  Normal   conf=0.555  T= 3.97C roc= +0.05C/min vib=0.455g  0.204ms
+[  55] t=  570.0s  Normal   conf=0.672  T= 3.95C roc= +0.20C/min vib=0.464g  0.064ms
+[  56] t=  580.0s  Normal   conf=0.504  T= 4.03C roc= +0.27C/min vib=0.459g  0.147ms
+[  57] t=  590.0s  Normal   conf=0.504  T= 4.02C roc= +0.26C/min vib=0.466g  0.224ms
+[  58] t=  600.0s  Normal   conf=0.664  T= 4.06C roc= -0.71C/min vib=0.459g  0.206ms
+[  59] t=  610.0s  Normal   conf=0.516  T= 3.98C roc= -0.35C/min vib=0.471g  0.065ms
+[  60] t=  620.0s  Normal   conf=0.734  T= 3.92C roc= -0.79C/min vib=0.452g  0.149ms
+[  61] t=  630.0s  Normal   conf=0.488  T= 3.90C roc= -0.03C/min vib=0.439g  0.138ms
+[  62] t=  640.0s  Normal   conf=0.820  T= 3.91C roc= +0.27C/min vib=0.455g  0.103ms
+[  63] t=  650.0s  Normal   conf=0.547  T= 4.02C roc= +0.04C/min vib=0.466g  0.218ms
+[  64] t=  660.0s  Normal   conf=0.699  T= 4.00C roc= +0.23C/min vib=0.472g  0.199ms
+[  65] t=  670.0s  Normal   conf=0.465  T= 3.99C roc= +0.01C/min vib=0.467g  0.354ms
+[  66] t=  680.0s  Normal   conf=0.738  T= 3.97C roc= +0.13C/min vib=0.473g  0.203ms
+[  67] t=  690.0s  Normal   conf=0.574  T= 4.02C roc= +0.17C/min vib=0.459g  0.208ms
+[  68] t=  700.0s  Normal   conf=0.504  T= 4.00C roc= -0.21C/min vib=0.457g  0.206ms
+[  69] t=  710.0s  Normal   conf=0.672  T= 3.99C roc= -0.34C/min vib=0.456g  0.332ms
+[  70] t=  720.0s  Normal   conf=0.801  T= 4.01C roc= +0.85C/min vib=0.463g  0.200ms
+[  71] t=  730.0s  Normal   conf=0.613  T= 4.14C roc= +0.52C/min vib=0.461g  0.123ms
+[  72] t=  740.0s  Normal   conf=0.586  T= 4.14C roc= -0.64C/min vib=0.448g  0.076ms
+[  73] t=  750.0s  Normal   conf=0.664  T= 4.10C roc= -0.56C/min vib=0.442g  0.222ms
+[  74] t=  760.0s  Normal   conf=0.430  T= 4.08C roc= +0.07C/min vib=0.446g  0.212ms
+[  75] t=  770.0s  Normal   conf=0.793  T= 4.04C roc= -0.26C/min vib=0.436g  0.412ms
+[  76] t=  780.0s  Normal   conf=0.652  T= 4.00C roc= -0.72C/min vib=0.438g  0.074ms
+[  77] t=  790.0s  Normal   conf=0.570  T= 3.89C roc= +0.34C/min vib=0.449g  0.081ms
+[  78] t=  800.0s  Normal   conf=0.625  T= 3.90C roc= +0.68C/min vib=0.446g  0.203ms
+[  79] t=  810.0s  Normal   conf=0.535  T= 3.98C roc= +0.51C/min vib=0.449g  0.258ms
+[  80] t=  820.0s  Normal   conf=0.594  T= 4.08C roc= +0.17C/min vib=0.451g  0.209ms
+[  81] t=  830.0s  Critical conf=0.496  T= 4.06C roc= -0.40C/min vib=0.475g  0.193ms
+[  82] t=  840.0s  Normal   conf=0.824  T= 4.01C roc= -0.88C/min vib=0.439g  0.206ms
+[  83] t=  850.0s  Normal   conf=0.809  T= 3.96C roc= +0.45C/min vib=0.447g  0.071ms
+[  84] t=  860.0s  Normal   conf=0.793  T= 3.99C roc= +0.39C/min vib=0.461g  0.401ms
+[  85] t=  870.0s  Normal   conf=0.688  T= 4.10C roc= -0.05C/min vib=0.469g  0.207ms
+[  86] t=  880.0s  Normal   conf=0.754  T= 4.06C roc= -0.16C/min vib=0.448g  0.239ms
+[  87] t=  890.0s  Normal   conf=0.570  T= 4.05C roc= -0.54C/min vib=0.460g  0.203ms
+[  88] t=  900.0s  Normal   conf=0.562  T= 3.95C roc= -0.16C/min vib=0.454g  0.204ms
+[  89] t=  910.0s  Normal   conf=0.855  T= 3.94C roc= -0.24C/min vib=0.466g  0.205ms
+[  90] t=  920.0s  Normal   conf=0.797  T= 3.92C roc= -0.23C/min vib=0.453g  0.213ms
+[  91] t=  930.0s  Normal   conf=0.793  T= 3.96C roc= +0.03C/min vib=0.439g  0.200ms
+[  92] t=  940.0s  Normal   conf=0.863  T= 3.95C roc= +0.23C/min vib=0.431g  0.221ms
+[  93] t=  950.0s  Normal   conf=0.488  T= 3.95C roc= -0.49C/min vib=0.431g  0.105ms
+[  94] t=  960.0s  Normal   conf=0.820  T= 3.93C roc= +0.06C/min vib=0.435g  0.208ms
+[  95] t=  970.0s  Normal   conf=0.672  T= 3.91C roc= +0.29C/min vib=0.444g  0.212ms
+[  96] t=  980.0s  Normal   conf=0.785  T= 4.01C roc= +0.00C/min vib=0.455g  0.206ms
+[  97] t=  990.0s  Normal   conf=0.801  T= 3.99C roc= +0.07C/min vib=0.449g  0.207ms
+[  98] t= 1000.0s  Normal   conf=0.734  T= 4.02C roc= -0.16C/min vib=0.439g  0.202ms
+[  99] t= 1010.0s  Normal   conf=0.672  T= 4.03C roc= +0.94C/min vib=0.445g  0.074ms
+[ 100] t= 1020.0s  Normal   conf=0.688  T= 4.11C roc= +0.32C/min vib=0.443g  0.262ms
+[ 101] t= 1030.0s  Normal   conf=0.652  T= 4.13C roc= -0.67C/min vib=0.460g  0.212ms
+[ 102] t= 1040.0s  Normal   conf=0.633  T= 4.08C roc= -0.07C/min vib=0.452g  0.107ms
+[ 103] t= 1050.0s  Normal   conf=0.609  T= 4.01C roc= +0.24C/min vib=0.455g  0.259ms
+[ 104] t= 1060.0s  Normal   conf=0.625  T= 4.05C roc= -0.10C/min vib=0.466g  0.161ms
+[ 105] t= 1070.0s  Normal   conf=0.574  T= 4.06C roc= +0.32C/min vib=0.464g  0.090ms
+[ 106] t= 1080.0s  Normal   conf=0.461  T= 4.23C roc= +1.12C/min vib=0.457g  0.201ms
+[ 107] t= 1090.0s  Normal   conf=0.496  T= 4.34C roc= +0.96C/min vib=0.456g  0.201ms
+[ 108] t= 1100.0s  Normal   conf=0.562  T= 4.51C roc= -0.01C/min vib=0.422g  0.090ms
+[ 109] t= 1110.0s  Normal   conf=0.480  T= 4.42C roc= -0.18C/min vib=0.431g  0.107ms
+[ 110] t= 1120.0s  Warning  conf=0.594  T= 4.28C roc= -1.66C/min vib=0.436g  0.198ms
+[ 111] t= 1130.0s  Normal   conf=0.449  T= 4.07C roc= -0.93C/min vib=0.448g  0.111ms
+[ 112] t= 1140.0s  Normal   conf=0.547  T= 3.98C roc= -0.14C/min vib=0.452g  0.162ms
+[ 113] t= 1150.0s  Normal   conf=0.848  T= 4.02C roc= +0.56C/min vib=0.446g  0.075ms
+[ 114] t= 1160.0s  Normal   conf=0.699  T= 4.06C roc= +0.16C/min vib=0.441g  0.206ms
+[ 115] t= 1170.0s  Normal   conf=0.711  T= 4.08C roc= -0.66C/min vib=0.435g  0.484ms
+[ 116] t= 1180.0s  Normal   conf=0.633  T= 4.01C roc= -0.15C/min vib=0.440g  0.204ms
+[ 117] t= 1190.0s  Normal   conf=0.738  T= 3.99C roc= -0.15C/min vib=0.451g  0.202ms
+[ 118] t=   30.0s  Normal   conf=0.574  T= 4.12C roc= +0.36C/min vib=0.552g  0.226ms
+[ 119] t=   40.0s  Critical conf=0.816  T= 4.33C roc= +1.60C/min vib=0.616g  0.165ms
+[ 120] t=   50.0s  Critical conf=0.789  T= 4.58C roc= +1.10C/min vib=0.680g  0.120ms
+[ 121] t=   60.0s  Critical conf=0.953  T= 4.92C roc= +1.92C/min vib=0.767g  0.200ms
+[ 122] t=   70.0s  Critical conf=0.973  T= 5.31C roc= +3.17C/min vib=0.883g  0.200ms
+[ 123] t=   80.0s  Critical conf=0.996  T= 5.88C roc= +3.38C/min vib=0.986g  0.206ms
+[ 124] t=   90.0s  Critical conf=0.996  T= 6.41C roc= +3.44C/min vib=1.115g  0.201ms
+[ 125] t=  100.0s  Critical conf=0.996  T= 7.06C roc= +3.85C/min vib=1.173g  0.334ms
+[ 126] t=  110.0s  Critical conf=0.996  T= 7.81C roc= +5.04C/min vib=1.231g  0.208ms
+[ 127] t=  120.0s  Critical conf=0.996  T= 8.69C roc= +4.61C/min vib=1.236g  0.205ms
+[ 128] t=  130.0s  Critical conf=0.996  T= 9.50C roc= +4.71C/min vib=1.293g  0.201ms
+[ 129] t=  140.0s  Critical conf=0.996  T=10.29C roc= +4.55C/min vib=1.330g  0.202ms
+[ 130] t=  150.0s  Critical conf=0.996  T=10.96C roc= +3.31C/min vib=1.407g  0.201ms
+[ 131] t=  160.0s  Critical conf=0.996  T=10.83C roc= -3.51C/min vib=1.307g  0.211ms
+[ 132] t=  170.0s  Critical conf=0.996  T= 9.66C roc=-11.12C/min vib=1.298g  0.215ms
+[ 133] t=  180.0s  Critical conf=0.996  T= 7.64C roc=-13.58C/min vib=1.325g  0.204ms
+[ 134] t=  190.0s  Critical conf=0.996  T= 5.92C roc= -7.86C/min vib=1.224g  0.200ms
+[ 135] t=  200.0s  Critical conf=0.988  T= 5.24C roc= +0.92C/min vib=1.186g  0.202ms
+[ 136] t=  210.0s  Critical conf=0.996  T= 5.61C roc= +5.19C/min vib=1.241g  0.240ms
+[ 137] t=  220.0s  Critical conf=0.996  T= 6.48C roc= +4.88C/min vib=1.240g  0.198ms
+[ 138] t=  230.0s  Critical conf=0.996  T= 7.29C roc= +4.99C/min vib=1.341g  0.085ms
+[ 139] t=  240.0s  Critical conf=0.996  T= 8.10C roc= +4.80C/min vib=1.247g  0.197ms
+[ 140] t=  250.0s  Critical conf=0.996  T= 8.94C roc= +4.43C/min vib=1.189g  0.221ms
+[ 141] t=  260.0s  Critical conf=0.996  T= 9.70C roc= +4.51C/min vib=1.169g  0.201ms
+[ 142] t=  270.0s  Critical conf=0.992  T=10.46C roc= +4.13C/min vib=1.177g  0.202ms
+[ 143] t=  280.0s  Critical conf=0.996  T=11.05C roc= +3.06C/min vib=1.187g  0.366ms
+[ 144] t=  290.0s  Critical conf=0.996  T=10.82C roc= -4.23C/min vib=1.268g  0.212ms
+[ 145] t=  300.0s  Critical conf=0.996  T= 9.44C roc=-13.10C/min vib=1.265g  0.212ms
+[ 146] t=  310.0s  Critical conf=0.996  T= 7.17C roc=-13.84C/min vib=1.151g  0.096ms
+[ 147] t=  320.0s  Critical conf=0.996  T= 5.57C roc= -5.63C/min vib=1.144g  0.080ms
+[ 148] t=  330.0s  Critical conf=0.996  T= 5.14C roc= +2.45C/min vib=1.162g  0.085ms
+[ 149] t=  340.0s  Critical conf=0.996  T= 5.74C roc= +3.85C/min vib=1.186g  0.170ms
+[ 150] t=  350.0s  Critical conf=0.996  T= 6.44C roc= +4.47C/min vib=1.238g  0.201ms
+[ 151] t=  360.0s  Critical conf=0.996  T= 7.28C roc= +4.53C/min vib=1.200g  0.070ms
+[ 152] t=  370.0s  Critical conf=0.996  T= 8.05C roc= +4.94C/min vib=1.154g  0.134ms
+[ 153] t=  380.0s  Critical conf=0.996  T= 8.92C roc= +4.61C/min vib=1.211g  0.227ms
+[ 154] t=  390.0s  Critical conf=0.996  T= 9.72C roc= +5.05C/min vib=1.198g  0.225ms
+[ 155] t=  400.0s  Critical conf=0.996  T=10.55C roc= +4.27C/min vib=1.238g  0.117ms
+[ 156] t=  410.0s  Critical conf=0.996  T=11.08C roc= +2.59C/min vib=1.213g  0.120ms
+[ 157] t=  420.0s  Critical conf=0.996  T=10.62C roc= -5.83C/min vib=1.243g  0.068ms
+[ 158] t=  430.0s  Critical conf=0.996  T= 9.14C roc=-14.06C/min vib=1.205g  0.068ms
+[ 159] t=  440.0s  Critical conf=0.996  T= 6.86C roc=-12.83C/min vib=1.138g  0.075ms
+[ 160] t=  450.0s  Critical conf=0.996  T= 5.53C roc= -4.61C/min vib=1.230g  0.208ms
+[ 161] t=  460.0s  Critical conf=0.996  T= 5.22C roc= +3.35C/min vib=1.280g  0.205ms
+[ 162] t=  470.0s  Critical conf=0.996  T= 5.90C roc= +4.56C/min vib=1.349g  0.204ms
+[ 163] t=  480.0s  Critical conf=0.996  T= 6.64C roc= +4.16C/min vib=1.200g  0.205ms
+[ 164] t=  490.0s  Critical conf=0.996  T= 7.39C roc= +4.61C/min vib=1.190g  0.092ms
+[ 165] t=  500.0s  Critical conf=0.996  T= 8.20C roc= +5.30C/min vib=1.212g  0.206ms
+[ 166] t=  510.0s  Critical conf=0.996  T= 9.05C roc= +4.67C/min vib=1.304g  0.147ms
+[ 167] t=  520.0s  Critical conf=0.996  T= 9.88C roc= +4.42C/min vib=1.207g  0.206ms
+[ 168] t=  530.0s  Critical conf=0.996  T=10.60C roc= +4.59C/min vib=1.237g  0.203ms
+[ 169] t=  540.0s  Critical conf=0.996  T=11.07C roc= +1.03C/min vib=1.230g  0.201ms
+[ 170] t=  550.0s  Critical conf=0.996  T=10.46C roc= -7.15C/min vib=1.267g  0.277ms
+[ 171] t=  560.0s  Critical conf=0.996  T= 8.94C roc=-13.97C/min vib=1.320g  0.204ms
+[ 172] t=  570.0s  Critical conf=0.996  T= 6.74C roc=-12.67C/min vib=1.368g  0.284ms
+[ 173] t=  580.0s  Critical conf=0.996  T= 5.47C roc= -4.21C/min vib=1.349g  0.200ms
+[ 174] t=  590.0s  Critical conf=0.996  T= 5.20C roc= +4.00C/min vib=1.274g  0.204ms
+[ 175] t=  600.0s  Critical conf=0.996  T= 5.93C roc= +3.93C/min vib=1.341g  0.203ms
+[ 176] t=  610.0s  Critical conf=0.996  T= 6.63C roc= +4.14C/min vib=1.188g  0.202ms
+[ 177] t=  620.0s  Critical conf=0.996  T= 7.36C roc= +5.08C/min vib=1.212g  0.071ms
+[ 178] t=  630.0s  Critical conf=0.996  T= 8.19C roc= +5.04C/min vib=1.222g  0.201ms
+[ 179] t=  640.0s  Critical conf=0.996  T= 9.05C roc= +4.89C/min vib=1.232g  0.094ms
+[ 180] t=  650.0s  Critical conf=0.996  T= 9.82C roc= +4.43C/min vib=1.239g  0.200ms
+[ 181] t=  660.0s  Critical conf=0.996  T=10.65C roc= +4.71C/min vib=1.220g  0.208ms
+[ 182] t=  670.0s  Critical conf=0.996  T=11.06C roc= +1.71C/min vib=1.256g  0.330ms
+[ 183] t=  680.0s  Critical conf=0.996  T=10.52C roc= -8.38C/min vib=1.365g  0.201ms
+[ 184] t=  690.0s  Critical conf=0.996  T= 8.80C roc=-14.84C/min vib=1.240g  0.206ms
+[ 185] t=  700.0s  Critical conf=0.996  T= 6.62C roc=-11.70C/min vib=1.302g  0.105ms
+[ 186] t=  710.0s  Critical conf=0.996  T= 5.37C roc= -3.26C/min vib=1.355g  0.204ms
+[ 187] t=  720.0s  Critical conf=0.996  T= 5.24C roc= +3.67C/min vib=1.294g  0.211ms
+[ 188] t=  730.0s  Critical conf=0.996  T= 5.94C roc= +4.99C/min vib=1.324g  0.207ms
+[ 189] t=  740.0s  Critical conf=0.996  T= 6.75C roc= +4.85C/min vib=1.236g  0.158ms
+[ 190] t=  750.0s  Critical conf=0.996  T= 7.60C roc= +4.62C/min vib=1.239g  0.148ms
+[ 191] t=  760.0s  Critical conf=0.996  T= 8.40C roc= +5.00C/min vib=1.278g  0.204ms
+[ 192] t=  770.0s  Critical conf=0.996  T= 9.20C roc= +4.99C/min vib=1.267g  0.206ms
+[ 193] t=  780.0s  Critical conf=0.996  T=10.10C roc= +5.32C/min vib=1.272g  0.235ms
+[ 194] t=  790.0s  Critical conf=0.996  T=11.03C roc= +5.68C/min vib=1.360g  0.208ms
+[ 195] t=  800.0s  Critical conf=0.996  T=11.54C roc= +1.19C/min vib=1.249g  0.216ms
+[ 196] t=  810.0s  Critical conf=0.996  T=10.98C roc= -7.98C/min vib=1.203g  0.334ms
+[ 197] t=  820.0s  Critical conf=0.996  T= 9.26C roc=-14.10C/min vib=1.202g  0.203ms
+[ 198] t=  830.0s  Critical conf=0.996  T= 7.17C roc=-10.80C/min vib=1.196g  0.134ms
+[ 199] t=  840.0s  Critical conf=0.996  T= 6.11C roc= -2.06C/min vib=1.197g  0.203ms
+[ 200] t=  850.0s  Critical conf=0.996  T= 5.96C roc= +3.89C/min vib=1.290g  0.203ms
+[ 201] t=  860.0s  Critical conf=0.996  T= 6.52C roc= +2.87C/min vib=1.363g  0.337ms
+[ 202] t=  870.0s  Critical conf=0.996  T= 7.03C roc= +2.76C/min vib=1.293g  0.202ms
+[ 203] t=  880.0s  Critical conf=0.996  T= 7.63C roc= +5.36C/min vib=1.264g  0.095ms
+[ 204] t=  890.0s  Critical conf=0.996  T= 8.46C roc= +5.51C/min vib=1.219g  0.222ms
+[ 205] t=  900.0s  Critical conf=0.996  T= 9.37C roc= +4.14C/min vib=1.161g  0.082ms
+[ 206] t=  910.0s  Critical conf=0.996  T=10.14C roc= +4.59C/min vib=1.245g  0.199ms
+[ 207] t=  920.0s  Critical conf=0.996  T=10.87C roc= +4.76C/min vib=1.238g  0.064ms
+[ 208] t=  930.0s  Critical conf=0.996  T=11.09C roc= -0.62C/min vib=1.175g  0.205ms
+[ 209] t=  940.0s  Critical conf=0.996  T=10.23C roc= -9.51C/min vib=1.223g  0.201ms
+[ 210] t=  950.0s  Critical conf=0.996  T= 8.29C roc=-14.38C/min vib=1.208g  0.096ms
+[ 211] t=  960.0s  Critical conf=0.996  T= 6.26C roc=-10.02C/min vib=1.355g  0.210ms
+[ 212] t=  970.0s  Critical conf=0.996  T= 5.30C roc= -0.72C/min vib=1.183g  0.201ms
+[ 213] t=  980.0s  Critical conf=0.996  T= 5.42C roc= +4.70C/min vib=1.224g  0.205ms
+[ 214] t=  990.0s  Critical conf=0.996  T= 6.27C roc= +5.04C/min vib=1.240g  0.458ms
+[ 215] t= 1000.0s  Critical conf=0.996  T= 7.07C roc= +4.89C/min vib=1.290g  0.190ms
+[ 216] t= 1010.0s  Critical conf=0.996  T= 7.91C roc= +4.12C/min vib=1.187g  0.331ms
+[ 217] t= 1020.0s  Critical conf=0.996  T= 8.65C roc= +4.15C/min vib=1.230g  0.200ms
+[ 218] t= 1030.0s  Critical conf=0.996  T= 9.36C roc= +4.47C/min vib=1.230g  0.203ms
+[ 219] t= 1040.0s  Critical conf=0.996  T=10.16C roc= +4.19C/min vib=1.222g  0.210ms
+[ 220] t= 1050.0s  Critical conf=0.996  T=10.92C roc= +4.36C/min vib=1.224g  0.201ms
+[ 221] t= 1060.0s  Critical conf=0.996  T=11.04C roc= -1.84C/min vib=1.212g  0.458ms
+[ 222] t= 1070.0s  Critical conf=0.996  T=10.11C roc=-10.46C/min vib=1.187g  0.272ms
+[ 223] t= 1080.0s  Critical conf=0.996  T= 8.09C roc=-14.28C/min vib=1.146g  0.201ms
+[ 224] t= 1090.0s  Critical conf=0.996  T= 6.17C roc= -9.37C/min vib=1.161g  0.347ms
+[ 225] t= 1100.0s  Critical conf=0.996  T= 5.29C roc= -0.52C/min vib=1.133g  0.213ms
+[ 226] t= 1110.0s  Critical conf=0.996  T= 5.45C roc= +4.56C/min vib=1.192g  0.200ms
+[ 227] t= 1120.0s  Critical conf=0.996  T= 6.24C roc= +4.45C/min vib=1.146g  0.210ms
+[ 228] t= 1130.0s  Critical conf=0.996  T= 7.02C roc= +4.93C/min vib=1.155g  0.204ms
+[ 229] t= 1140.0s  Critical conf=0.996  T= 7.80C roc= +4.21C/min vib=1.116g  0.203ms
+[ 230] t= 1150.0s  Critical conf=0.996  T= 8.57C roc= +5.02C/min vib=1.141g  0.199ms
+[ 231] t= 1160.0s  Critical conf=0.996  T= 9.40C roc= +5.29C/min vib=1.226g  0.203ms
+[ 232] t= 1170.0s  Critical conf=0.996  T=10.21C roc= +4.66C/min vib=1.258g  0.202ms
+[ 233] t= 1180.0s  Critical conf=0.996  T=10.92C roc= +3.71C/min vib=1.257g  0.395ms
+[ 234] t= 1190.0s  Critical conf=0.996  T=10.95C roc= -1.87C/min vib=1.302g  0.076ms
+[ 235] t= 1200.0s  Critical conf=0.996  T= 9.95C roc=-11.05C/min vib=1.192g  0.202ms
+[ 236] t= 1210.0s  Critical conf=0.996  T= 7.87C roc=-14.40C/min vib=1.184g  0.205ms
+[ 237] t= 1220.0s  Critical conf=0.996  T= 6.00C roc= -8.63C/min vib=1.203g  0.200ms
+[ 238] t= 1230.0s  Critical conf=0.996  T= 5.28C roc= -0.01C/min vib=1.181g  0.081ms
+[ 239] t= 1240.0s  Critical conf=0.996  T= 5.57C roc= +4.82C/min vib=1.214g  0.195ms
+[ 240] t= 1250.0s  Critical conf=0.996  T= 6.31C roc= +4.52C/min vib=1.281g  0.188ms
+[ 241] t= 1260.0s  Critical conf=0.996  T= 7.08C roc= +4.23C/min vib=1.288g  0.167ms
+[ 242] t= 1270.0s  Critical conf=0.996  T= 7.86C roc= +4.70C/min vib=1.268g  0.205ms
+[ 243] t= 1280.0s  Critical conf=0.996  T= 8.68C roc= +4.89C/min vib=1.207g  0.345ms
+[ 244] t= 1290.0s  Critical conf=0.996  T= 9.51C roc= +4.21C/min vib=1.167g  0.213ms
+[ 245] t= 1300.0s  Critical conf=0.996  T=10.30C roc= +4.87C/min vib=1.244g  0.194ms
+[ 246] t= 1310.0s  Critical conf=0.996  T=11.06C roc= +4.12C/min vib=1.207g  0.106ms
+[ 247] t= 1320.0s  Critical conf=0.996  T=11.02C roc= -3.20C/min vib=1.246g  0.129ms
+[ 248] t= 1330.0s  Critical conf=0.996  T= 9.82C roc=-12.27C/min vib=1.148g  0.126ms
+[ 249] t= 1340.0s  Critical conf=0.996  T= 7.57C roc=-14.50C/min vib=1.288g  0.095ms
+[ 250] t= 1350.0s  Critical conf=0.996  T= 5.78C roc= -7.64C/min vib=1.259g  0.148ms
+[ 251] t= 1360.0s  Critical conf=0.996  T= 5.12C roc= +1.09C/min vib=1.330g  0.127ms
+[ 252] t= 1370.0s  Critical conf=0.996  T= 5.56C roc= +5.10C/min vib=1.348g  0.092ms
+[ 253] t= 1380.0s  Critical conf=0.996  T= 6.40C roc= +5.04C/min vib=1.272g  0.123ms
+[ 254] t= 1390.0s  Critical conf=0.996  T= 7.29C roc= +4.80C/min vib=1.244g  0.070ms
+[ 255] t= 1400.0s  Critical conf=0.996  T= 8.09C roc= +4.67C/min vib=1.272g  0.216ms
+[ 256] t= 1410.0s  Critical conf=0.996  T= 8.87C roc= +4.19C/min vib=1.087g  0.111ms
+[ 257] t= 1420.0s  Critical conf=0.992  T= 9.62C roc= +4.59C/min vib=1.120g  0.125ms
+[ 258] t= 1430.0s  Critical conf=0.992  T=10.39C roc= +4.77C/min vib=1.196g  0.114ms
+[ 259] t= 1440.0s  Critical conf=0.984  T=11.09C roc= +3.56C/min vib=1.179g  0.126ms
+[ 260] t= 1450.0s  Critical conf=0.996  T=10.87C roc= -4.38C/min vib=1.214g  0.211ms
+[ 261] t= 1460.0s  Critical conf=0.996  T= 9.55C roc=-12.84C/min vib=1.193g  0.099ms
+[ 262] t= 1470.0s  Critical conf=0.996  T= 7.33C roc=-13.65C/min vib=1.216g  0.119ms
+[ 263] t= 1480.0s  Critical conf=0.996  T= 5.67C roc= -6.73C/min vib=1.224g  0.071ms
+[ 264] t= 1490.0s  Critical conf=0.996  T= 5.18C roc= +2.25C/min vib=1.222g  0.082ms
+[ 265] t= 1500.0s  Critical conf=0.996  T= 5.67C roc= +4.89C/min vib=1.303g  0.072ms
+[ 266] t= 1510.0s  Critical conf=0.996  T= 6.52C roc= +3.93C/min vib=1.281g  0.093ms
+[ 267] t= 1520.0s  Critical conf=0.996  T= 7.26C roc= +3.79C/min vib=1.287g  0.116ms
+[ 268] t= 1530.0s  Critical conf=0.996  T= 8.00C roc= +4.55C/min vib=1.243g  0.108ms
+[ 269] t= 1540.0s  Critical conf=0.996  T= 8.80C roc= +4.86C/min vib=1.255g  0.082ms
+[ 270] t= 1550.0s  Critical conf=0.996  T= 9.76C roc= +5.43C/min vib=1.238g  0.128ms
+[ 271] t= 1560.0s  Critical conf=0.895  T=10.69C roc= +5.04C/min vib=1.108g  0.075ms
+[ 272] t= 1570.0s  Critical conf=0.996  T=11.43C roc= +3.55C/min vib=1.221g  0.093ms
+[ 273] t= 1580.0s  Critical conf=0.996  T=11.24C roc= -4.13C/min vib=1.190g  0.090ms
+[ 274] t= 1590.0s  Critical conf=0.996  T=10.05C roc=-12.45C/min vib=1.236g  0.077ms
+[ 275] t= 1600.0s  Critical conf=0.996  T= 7.90C roc=-13.13C/min vib=1.126g  0.126ms
+[ 276] t= 1610.0s  Critical conf=0.996  T= 6.41C roc= -6.15C/min vib=1.180g  0.074ms
+[ 277] t= 1620.0s  Critical conf=0.996  T= 5.88C roc= +1.97C/min vib=1.176g  0.084ms
+[ 278] t= 1630.0s  Critical conf=0.996  T= 6.36C roc= +3.56C/min vib=1.185g  0.085ms
+[ 279] t= 1640.0s  Critical conf=0.996  T= 6.92C roc= +3.36C/min vib=1.156g  0.167ms
+[ 280] t= 1650.0s  Critical conf=0.996  T= 7.55C roc= +3.42C/min vib=1.148g  0.114ms
+[ 281] t= 1660.0s  Critical conf=0.996  T= 8.20C roc= +4.38C/min vib=1.231g  0.097ms
+[ 282] t= 1670.0s  Critical conf=0.996  T= 9.01C roc= +4.91C/min vib=1.211g  0.090ms
+[ 283] t= 1680.0s  Critical conf=0.996  T= 9.77C roc= +4.45C/min vib=1.240g  0.171ms
+[ 284] t= 1690.0s  Critical conf=0.988  T=10.52C roc= +4.48C/min vib=1.151g  0.106ms
+[ 285] t= 1700.0s  Critical conf=0.996  T=11.09C roc= +2.31C/min vib=1.182g  0.096ms
+[ 286] t= 1710.0s  Critical conf=0.996  T=10.73C roc= -6.01C/min vib=1.150g  0.074ms
+[ 287] t= 1720.0s  Critical conf=0.996  T= 9.24C roc=-13.88C/min vib=1.123g  0.112ms
+[ 288] t= 1730.0s  Critical conf=0.996  T= 6.93C roc=-13.40C/min vib=1.167g  0.142ms
+[ 289] t= 1740.0s  Critical conf=0.996  T= 5.51C roc= -4.89C/min vib=1.142g  0.068ms
+[ 290] t= 1750.0s  Critical conf=0.984  T= 5.21C roc= +3.54C/min vib=1.161g  0.141ms
+[ 291] t= 1760.0s  Critical conf=0.996  T= 5.91C roc= +4.34C/min vib=1.143g  0.120ms
+[ 292] t= 1770.0s  Critical conf=0.996  T= 6.64C roc= +4.47C/min vib=1.198g  0.158ms
+[ 293] t= 1780.0s  Critical conf=0.996  T= 7.40C roc= +4.84C/min vib=1.257g  0.117ms
+[ 294] t= 1790.0s  Critical conf=0.996  T= 8.21C roc= +4.70C/min vib=1.264g  0.087ms
+[ 295] t=   30.0s  Normal   conf=0.688  T= 3.91C roc= +0.40C/min vib=0.472g  0.118ms
+[ 296] t=   40.0s  Normal   conf=0.672  T= 3.99C roc= +0.21C/min vib=0.461g  0.143ms
+[ 297] t=   50.0s  Normal   conf=0.562  T= 4.09C roc= +0.53C/min vib=0.461g  0.083ms
+[ 298] t=   60.0s  Normal   conf=0.688  T= 4.09C roc= +0.43C/min vib=0.444g  0.157ms
+[ 299] t=   70.0s  Normal   conf=0.504  T= 4.08C roc= -0.86C/min vib=0.444g  0.088ms
+[ 300] t=   80.0s  Normal   conf=0.734  T= 4.00C roc= -0.42C/min vib=0.448g  0.117ms
+[ 301] t=   90.0s  Normal   conf=0.773  T= 3.97C roc= +0.13C/min vib=0.433g  0.138ms
+[ 302] t=  100.0s  Normal   conf=0.719  T= 3.96C roc= +0.32C/min vib=0.434g  0.158ms
+[ 303] t=  110.0s  Normal   conf=0.586  T= 4.00C roc= +0.07C/min vib=0.446g  0.139ms
+[ 304] t=  120.0s  Normal   conf=0.766  T= 3.99C roc= +0.17C/min vib=0.459g  0.122ms
+[ 305] t=  130.0s  Normal   conf=0.836  T= 4.02C roc= +0.30C/min vib=0.479g  0.121ms
+[ 306] t=  140.0s  Normal   conf=0.613  T= 4.00C roc= -0.12C/min vib=0.473g  0.170ms
+[ 307] t=  150.0s  Normal   conf=0.547  T= 4.01C roc= -0.49C/min vib=0.469g  0.120ms
+[ 308] t=  160.0s  Normal   conf=0.512  T= 4.01C roc= -0.29C/min vib=0.447g  0.138ms
+[ 309] t=  170.0s  Normal   conf=0.555  T= 4.01C roc= -0.04C/min vib=0.443g  0.085ms
+[ 310] t=  180.0s  Normal   conf=0.469  T= 4.01C roc= -0.17C/min vib=0.437g  0.132ms
+[ 311] t=  190.0s  Normal   conf=0.793  T= 3.97C roc= +0.09C/min vib=0.442g  0.134ms
+[ 312] t=  200.0s  Normal   conf=0.754  T= 3.99C roc= +0.56C/min vib=0.454g  0.094ms
+[ 313] t=  210.0s  Normal   conf=0.555  T= 4.03C roc= +0.52C/min vib=0.452g  0.143ms
+[ 314] t=  220.0s  Normal   conf=0.469  T= 4.20C roc= +0.24C/min vib=0.446g  0.142ms
+[ 315] t=  230.0s  Normal   conf=0.566  T= 4.26C roc= +1.06C/min vib=0.450g  0.112ms
+[ 316] t=  240.0s  Normal   conf=0.574  T= 4.38C roc= +0.11C/min vib=0.430g  0.074ms
+[ 317] t=  250.0s  Warning  conf=0.520  T= 4.52C roc= +1.16C/min vib=0.430g  0.075ms
+[ 318] t=  260.0s  Warning  conf=0.566  T= 4.63C roc= +1.19C/min vib=0.427g  0.107ms
+[ 319] t=  270.0s  Normal   conf=0.465  T= 4.82C roc= -0.45C/min vib=0.437g  0.129ms
+[ 320] t=  280.0s  Normal   conf=0.562  T= 4.82C roc= +0.36C/min vib=0.439g  0.102ms
+[ 321] t=  290.0s  Normal   conf=0.516  T= 4.80C roc= -0.40C/min vib=0.449g  0.125ms
+[ 322] t=  300.0s  Warning  conf=0.562  T= 4.72C roc= -1.56C/min vib=0.431g  0.117ms
+[ 323] t=  310.0s  Warning  conf=0.676  T= 4.41C roc= -1.92C/min vib=0.428g  0.096ms
+[ 324] t=  320.0s  Normal   conf=0.473  T= 4.14C roc= -0.97C/min vib=0.448g  0.080ms
+[ 325] t=  330.0s  Normal   conf=0.785  T= 3.96C roc= -0.51C/min vib=0.456g  0.105ms
+[ 326] t=  340.0s  Normal   conf=0.492  T= 3.99C roc= +0.98C/min vib=0.476g  0.086ms
+[ 327] t=  350.0s  Normal   conf=0.449  T= 4.05C roc= +0.41C/min vib=0.470g  0.106ms
+[ 328] t=  360.0s  Normal   conf=0.562  T= 4.08C roc= -1.23C/min vib=0.476g  0.108ms
+[ 329] t=  370.0s  Normal   conf=0.699  T= 4.01C roc= -0.03C/min vib=0.477g  0.103ms
+[ 330] t=  380.0s  Normal   conf=0.531  T= 4.02C roc= +0.87C/min vib=0.475g  0.090ms
+[ 331] t=  390.0s  Normal   conf=0.719  T= 4.07C roc= -0.13C/min vib=0.467g  0.114ms
+[ 332] t=  400.0s  Normal   conf=0.531  T= 4.03C roc= -0.35C/min vib=0.468g  0.081ms
+[ 333] t=  410.0s  Normal   conf=0.707  T= 3.95C roc= -0.34C/min vib=0.458g  0.099ms
+[ 334] t=  420.0s  Normal   conf=0.793  T= 3.93C roc= +0.42C/min vib=0.454g  0.095ms
+[ 335] t=  430.0s  Normal   conf=0.562  T= 3.94C roc= +0.44C/min vib=0.464g  0.072ms
+[ 336] t=  440.0s  Normal   conf=0.738  T= 4.00C roc= -0.32C/min vib=0.449g  0.085ms
+[ 337] t=  450.0s  Normal   conf=0.766  T= 3.99C roc= +0.38C/min vib=0.450g  0.090ms
+[ 338] t=  460.0s  Normal   conf=0.586  T= 3.97C roc= +0.07C/min vib=0.471g  0.112ms
+[ 339] t=  470.0s  Normal   conf=0.672  T= 4.01C roc= +0.43C/min vib=0.455g  0.105ms
+[ 340] t=  480.0s  Normal   conf=0.699  T= 4.03C roc= +0.51C/min vib=0.438g  0.181ms
+[ 341] t=  490.0s  Normal   conf=0.648  T= 4.09C roc= -0.37C/min vib=0.435g  0.087ms
+[ 342] t=  500.0s  Normal   conf=0.676  T= 4.04C roc= -0.41C/min vib=0.443g  0.102ms
+[ 343] t=  510.0s  Normal   conf=0.625  T= 4.04C roc= -0.11C/min vib=0.434g  0.080ms
+[ 344] t=  520.0s  Normal   conf=0.469  T= 3.97C roc= +0.29C/min vib=0.451g  0.087ms
+[ 345] t=  530.0s  Normal   conf=0.648  T= 3.96C roc= -0.69C/min vib=0.445g  0.125ms
+[ 346] t=  540.0s  Normal   conf=0.734  T= 3.92C roc= -0.13C/min vib=0.466g  0.104ms
+[ 347] t=  550.0s  Normal   conf=0.820  T= 3.93C roc= +0.37C/min vib=0.456g  0.101ms
+[ 348] t=  560.0s  Normal   conf=0.785  T= 3.97C roc= -0.02C/min vib=0.459g  0.104ms
+[ 349] t=  570.0s  Normal   conf=0.766  T= 4.00C roc= -0.02C/min vib=0.456g  0.130ms
+[ 350] t=  580.0s  Normal   conf=0.504  T= 4.00C roc= +0.12C/min vib=0.464g  0.109ms
+[ 351] t=  590.0s  Normal   conf=0.805  T= 4.04C roc= -0.52C/min vib=0.441g  0.082ms
+[ 352] t=  600.0s  Normal   conf=0.449  T= 4.06C roc= -0.14C/min vib=0.453g  0.113ms
+[ 353] t=  610.0s  Normal   conf=0.781  T= 4.03C roc= -0.07C/min vib=0.440g  0.083ms
+[ 354] t=  620.0s  Normal   conf=0.531  T= 4.01C roc= -0.30C/min vib=0.445g  0.106ms
+[ 355] t=  630.0s  Normal   conf=0.738  T= 3.99C roc= -0.03C/min vib=0.432g  0.067ms
+[ 356] t=  640.0s  Normal   conf=0.652  T= 3.98C roc= -0.12C/min vib=0.447g  0.157ms
+[ 357] t=  650.0s  Normal   conf=0.652  T= 4.01C roc= +0.26C/min vib=0.450g  0.144ms
+[ 358] t=  660.0s  Normal   conf=0.801  T= 4.05C roc= +0.79C/min vib=0.460g  0.120ms
+[ 359] t=  670.0s  Normal   conf=0.570  T= 4.10C roc= -0.33C/min vib=0.430g  0.140ms
+[ 360] t=  680.0s  Normal   conf=0.699  T= 4.07C roc= -0.28C/min vib=0.432g  0.105ms
+[ 361] t=  690.0s  Normal   conf=0.535  T= 3.98C roc= -0.31C/min vib=0.437g  0.072ms
+[ 362] t=  700.0s  Normal   conf=0.871  T= 3.94C roc= -0.27C/min vib=0.443g  0.129ms
+[ 363] t=  710.0s  Normal   conf=0.574  T= 3.95C roc= +0.44C/min vib=0.441g  0.155ms
+[ 364] t=  720.0s  Normal   conf=0.762  T= 3.97C roc= -0.20C/min vib=0.433g  0.105ms
+[ 365] t=  730.0s  Normal   conf=0.793  T= 4.03C roc= -0.30C/min vib=0.418g  0.143ms
+[ 366] t=  740.0s  Normal   conf=0.879  T= 3.93C roc= +0.01C/min vib=0.414g  0.072ms
+[ 367] t=  750.0s  Normal   conf=0.480  T= 3.98C roc= -0.43C/min vib=0.431g  0.072ms
+[ 368] t=  760.0s  Normal   conf=0.625  T= 3.95C roc= +0.66C/min vib=0.446g  0.129ms
+[ 369] t=  770.0s  Normal   conf=0.492  T= 4.06C roc= +0.23C/min vib=0.453g  0.081ms
+[ 370] t=  780.0s  Normal   conf=0.492  T= 4.05C roc= +0.25C/min vib=0.442g  0.084ms
+[ 371] t=  790.0s  Normal   conf=0.707  T= 4.03C roc= -0.23C/min vib=0.441g  0.111ms
+[ 372] t=  800.0s  Normal   conf=0.719  T= 4.00C roc= -0.49C/min vib=0.468g  0.141ms
+[ 373] t=  810.0s  Normal   conf=0.809  T= 3.95C roc= +0.20C/min vib=0.479g  0.091ms
+[ 374] t=  820.0s  Normal   conf=0.496  T= 3.98C roc= +0.38C/min vib=0.484g  0.136ms
+[ 375] t=  830.0s  Normal   conf=0.738  T= 4.03C roc= +0.25C/min vib=0.469g  0.106ms
+[ 376] t=  840.0s  Normal   conf=0.555  T= 4.06C roc= -0.19C/min vib=0.460g  0.145ms
+[ 377] t=  850.0s  Normal   conf=0.641  T= 4.12C roc= +0.14C/min vib=0.449g  0.095ms
+[ 378] t=  860.0s  Normal   conf=0.711  T= 4.13C roc= +0.55C/min vib=0.444g  0.148ms
+[ 379] t=  870.0s  Normal   conf=0.480  T= 4.13C roc= -0.56C/min vib=0.469g  0.087ms
+[ 380] t=  880.0s  Normal   conf=0.609  T= 4.05C roc= -0.24C/min vib=0.450g  0.152ms
+[ 381] t=  890.0s  Normal   conf=0.770  T= 3.98C roc= -0.24C/min vib=0.462g  0.091ms
+[ 382] t=  900.0s  Normal   conf=0.652  T= 4.04C roc= +0.19C/min vib=0.460g  0.112ms
+[ 383] t=  910.0s  Normal   conf=0.531  T= 3.95C roc= +0.05C/min vib=0.467g  0.074ms
+[ 384] t=  920.0s  Normal   conf=0.492  T= 4.02C roc= -0.46C/min vib=0.471g  0.082ms
+[ 385] t=  930.0s  Normal   conf=0.652  T= 3.95C roc= +0.22C/min vib=0.459g  0.110ms
+[ 386] t=  940.0s  Normal   conf=0.480  T= 3.98C roc= -0.24C/min vib=0.474g  0.103ms
+[ 387] t=  950.0s  Normal   conf=0.664  T= 3.99C roc= +0.43C/min vib=0.452g  0.079ms
+[ 388] t=  960.0s  Normal   conf=0.531  T= 3.97C roc= -0.35C/min vib=0.441g  0.088ms
+[ 389] t=  970.0s  Normal   conf=0.688  T= 3.99C roc= -0.22C/min vib=0.446g  0.080ms
+[ 390] t=  980.0s  Normal   conf=0.688  T= 3.94C roc= +0.77C/min vib=0.456g  0.089ms
+[ 391] t=  990.0s  Normal   conf=0.512  T= 4.05C roc= +0.54C/min vib=0.455g  0.086ms
+[ 392] t= 1000.0s  Normal   conf=0.711  T= 4.20C roc= +1.12C/min vib=0.441g  0.072ms
+[ 393] t= 1010.0s  Normal   conf=0.566  T= 4.35C roc= +1.14C/min vib=0.432g  0.081ms
+[ 394] t= 1020.0s  Normal   conf=0.480  T= 4.61C roc= +0.82C/min vib=0.422g  0.080ms
+[ 395] t= 1030.0s  Warning  conf=0.562  T= 4.78C roc= +0.87C/min vib=0.422g  0.126ms
+[ 396] t= 1040.0s  Warning  conf=0.480  T= 4.86C roc= -0.04C/min vib=0.435g  0.138ms
+[ 397] t= 1050.0s  Warning  conf=0.449  T= 4.86C roc= -0.05C/min vib=0.444g  0.072ms
+[ 398] t= 1060.0s  Warning  conf=0.492  T= 4.74C roc= -0.39C/min vib=0.429g  0.090ms
+[ 399] t= 1070.0s  Warning  conf=0.633  T= 4.63C roc= -1.64C/min vib=0.426g  0.075ms
+[ 400] t= 1080.0s  Warning  conf=0.539  T= 4.34C roc= -1.18C/min vib=0.425g  0.092ms
+[ 401] t= 1090.0s  Normal   conf=0.609  T= 4.17C roc= -0.81C/min vib=0.449g  0.088ms
+[ 402] t= 1100.0s  Normal   conf=0.512  T= 4.07C roc= -0.38C/min vib=0.443g  0.100ms
+[ 403] t= 1110.0s  Normal   conf=0.586  T= 4.06C roc= +0.31C/min vib=0.451g  0.069ms
+[ 404] t= 1120.0s  Normal   conf=0.594  T= 4.07C roc= +0.14C/min vib=0.451g  0.103ms
+[ 405] t= 1130.0s  Normal   conf=0.730  T= 4.08C roc= +0.27C/min vib=0.430g  0.145ms
+[ 406] t= 1140.0s  Normal   conf=0.609  T= 4.07C roc= -0.31C/min vib=0.429g  0.135ms
+[ 407] t= 1150.0s  Normal   conf=0.570  T= 4.09C roc= -0.19C/min vib=0.437g  0.074ms
+[ 408] t= 1160.0s  Normal   conf=0.613  T= 4.01C roc= +0.12C/min vib=0.457g  0.143ms
+[ 409] t= 1170.0s  Normal   conf=0.547  T= 4.07C roc= -0.46C/min vib=0.458g  0.149ms
+[ 410] t= 1180.0s  Normal   conf=0.801  T= 3.96C roc= +0.52C/min vib=0.459g  0.080ms
+[ 411] t= 1190.0s  Normal   conf=0.672  T= 4.01C roc= +0.02C/min vib=0.460g  0.115ms
+[ 412] t= 1200.0s  Normal   conf=0.820  T= 4.00C roc= +0.02C/min vib=0.445g  0.094ms
+[ 413] t= 1210.0s  Normal   conf=0.801  T= 4.02C roc= +0.09C/min vib=0.439g  0.103ms
+[ 414] t= 1220.0s  Normal   conf=0.512  T= 4.08C roc= +0.07C/min vib=0.442g  0.095ms
+[ 415] t= 1230.0s  Normal   conf=0.734  T= 4.05C roc= +0.19C/min vib=0.435g  0.078ms
+[ 416] t= 1240.0s  Normal   conf=0.555  T= 4.12C roc= -0.14C/min vib=0.451g  0.136ms
+[ 417] t= 1250.0s  Normal   conf=0.730  T= 4.04C roc= -0.37C/min vib=0.436g  0.093ms
+[ 418] t= 1260.0s  Normal   conf=0.629  T= 4.07C roc= -0.54C/min vib=0.433g  0.132ms
+[ 419] t= 1270.0s  Normal   conf=0.836  T= 3.96C roc= +0.13C/min vib=0.431g  0.102ms
+[ 420] t= 1280.0s  Normal   conf=0.730  T= 3.99C roc= +0.01C/min vib=0.438g  0.072ms
+[ 421] t= 1290.0s  Normal   conf=0.828  T= 3.96C roc= +0.27C/min vib=0.450g  0.094ms
+[ 422] t= 1300.0s  Normal   conf=0.828  T= 3.97C roc= +0.27C/min vib=0.432g  0.173ms
+[ 423] t= 1310.0s  Normal   conf=0.781  T= 4.04C roc= +0.44C/min vib=0.432g  0.113ms
+[ 424] t= 1320.0s  Normal   conf=0.699  T= 4.00C roc= +0.18C/min vib=0.441g  0.075ms
+[ 425] t= 1330.0s  Normal   conf=0.504  T= 4.04C roc= -0.68C/min vib=0.429g  0.123ms
+[ 426] t= 1340.0s  Normal   conf=0.422  T= 3.95C roc= -0.47C/min vib=0.440g  0.126ms
+[ 427] t= 1350.0s  Normal   conf=0.895  T= 3.87C roc= +0.39C/min vib=0.438g  0.130ms
+[ 428] t= 1360.0s  Normal   conf=0.664  T= 3.91C roc= +0.43C/min vib=0.425g  0.099ms
+[ 429] t= 1370.0s  Normal   conf=0.688  T= 3.94C roc= -0.06C/min vib=0.421g  0.100ms
+[ 430] t= 1380.0s  Normal   conf=0.832  T= 3.94C roc= +0.21C/min vib=0.430g  0.117ms
+[ 431] t= 1390.0s  Normal   conf=0.785  T= 3.97C roc= -0.10C/min vib=0.443g  0.118ms
+[ 432] t= 1400.0s  Normal   conf=0.688  T= 4.01C roc= -0.63C/min vib=0.446g  0.081ms
+[ 433] t= 1410.0s  Normal   conf=0.594  T= 4.03C roc= +0.91C/min vib=0.465g  0.107ms
+[ 434] t= 1420.0s  Normal   conf=0.637  T= 4.16C roc= +0.81C/min vib=0.452g  0.086ms
+[ 435] t= 1430.0s  Normal   conf=0.531  T= 4.37C roc= +0.59C/min vib=0.444g  0.083ms
+[ 436] t= 1440.0s  Normal   conf=0.484  T= 4.55C roc= +1.56C/min vib=0.443g  0.070ms
+[ 437] t= 1450.0s  Normal   conf=0.508  T= 4.73C roc= +1.04C/min vib=0.464g  0.093ms
+[ 438] t= 1460.0s  Normal   conf=0.449  T= 4.75C roc= -0.84C/min vib=0.472g  0.123ms
+[ 439] t= 1470.0s  Normal   conf=0.531  T= 4.56C roc= -1.62C/min vib=0.475g  0.125ms
+[ 440] t= 1480.0s  Warning  conf=0.508  T= 4.22C roc= -1.93C/min vib=0.454g  0.089ms
+[ 441] t= 1490.0s  Normal   conf=0.504  T= 4.02C roc= -0.80C/min vib=0.435g  0.085ms
+[ 442] t= 1500.0s  Normal   conf=0.852  T= 3.95C roc= +0.50C/min vib=0.452g  0.165ms
+[ 443] t= 1510.0s  Normal   conf=0.746  T= 3.97C roc= +0.40C/min vib=0.463g  0.077ms
+[ 444] t= 1520.0s  Normal   conf=0.520  T= 3.97C roc= -0.46C/min vib=0.469g  0.104ms
+[ 445] t= 1530.0s  Normal   conf=0.754  T= 3.91C roc= -0.08C/min vib=0.456g  0.167ms
+[ 446] t= 1540.0s  Normal   conf=0.707  T= 3.91C roc= +0.25C/min vib=0.462g  0.077ms
+[ 447] t= 1550.0s  Normal   conf=0.855  T= 3.92C roc= +0.30C/min vib=0.446g  0.075ms
+[ 448] t= 1560.0s  Normal   conf=0.906  T= 3.96C roc= +0.12C/min vib=0.440g  0.104ms
+[ 449] t= 1570.0s  Normal   conf=0.785  T= 3.95C roc= +0.11C/min vib=0.456g  0.160ms
+[ 450] t= 1580.0s  Normal   conf=0.844  T= 3.92C roc= +0.16C/min vib=0.471g  0.124ms
+[ 451] t= 1590.0s  Normal   conf=0.781  T= 3.93C roc= +0.64C/min vib=0.466g  0.100ms
+[ 452] t= 1600.0s  Normal   conf=0.719  T= 4.01C roc= +0.54C/min vib=0.455g  0.097ms
+[ 453] t= 1610.0s  Normal   conf=0.773  T= 4.02C roc= -0.11C/min vib=0.439g  0.102ms
+[ 454] t= 1620.0s  Normal   conf=0.664  T= 4.02C roc= -0.73C/min vib=0.440g  0.101ms
+[ 455] t= 1630.0s  Normal   conf=0.809  T= 3.93C roc= -0.08C/min vib=0.459g  0.125ms
+[ 456] t= 1640.0s  Normal   conf=0.602  T= 3.91C roc= +0.22C/min vib=0.471g  0.100ms
+[ 457] t= 1650.0s  Normal   conf=0.602  T= 3.93C roc= +0.12C/min vib=0.459g  0.121ms
+[ 458] t= 1660.0s  Normal   conf=0.707  T= 3.89C roc= +0.28C/min vib=0.456g  0.074ms
+[ 459] t= 1670.0s  Normal   conf=0.785  T= 3.94C roc= +0.01C/min vib=0.459g  0.178ms
+[ 460] t= 1680.0s  Normal   conf=0.570  T= 3.96C roc= +0.13C/min vib=0.446g  0.083ms
+[ 461] t= 1690.0s  Normal   conf=0.734  T= 3.98C roc= -0.12C/min vib=0.451g  0.178ms
+[ 462] t= 1700.0s  Normal   conf=0.797  T= 3.93C roc= -0.61C/min vib=0.462g  0.135ms
+[ 463] t= 1710.0s  Normal   conf=0.719  T= 3.89C roc= +0.24C/min vib=0.456g  0.123ms
+[ 464] t= 1720.0s  Normal   conf=0.625  T= 3.91C roc= +1.04C/min vib=0.467g  0.069ms
+[ 465] t= 1730.0s  Normal   conf=0.781  T= 4.03C roc= +0.27C/min vib=0.455g  0.140ms
+[ 466] t= 1740.0s  Normal   conf=0.699  T= 4.04C roc= -0.03C/min vib=0.447g  0.068ms
+[ 467] t= 1750.0s  Normal   conf=0.793  T= 4.02C roc= -0.17C/min vib=0.446g  0.134ms
+[ 468] t= 1760.0s  Normal   conf=0.504  T= 4.01C roc= +0.05C/min vib=0.468g  0.082ms
+[ 469] t= 1770.0s  Normal   conf=0.707  T= 4.03C roc= +0.49C/min vib=0.465g  0.078ms
+[ 470] t= 1780.0s  Normal   conf=0.734  T= 4.16C roc= +1.53C/min vib=0.460g  0.105ms
+[ 471] t= 1790.0s  Normal   conf=0.535  T= 4.39C roc= +1.73C/min vib=0.432g  0.103ms
+[ 472] t= 1800.0s  Warning  conf=0.629  T= 4.63C roc= +1.33C/min vib=0.442g  0.101ms
+[ 473] t= 1810.0s  Warning  conf=0.496  T= 4.70C roc= -0.24C/min vib=0.450g  0.102ms
+[ 474] t= 1820.0s  Warning  conf=0.449  T= 4.56C roc= -2.00C/min vib=0.475g  0.069ms
+[ 475] t= 1830.0s  Normal   conf=0.422  T= 4.28C roc= -1.99C/min vib=0.467g  0.070ms
+[ 476] t= 1840.0s  Normal   conf=0.566  T= 4.03C roc= -0.56C/min vib=0.481g  0.161ms
+[ 477] t= 1850.0s  Normal   conf=0.547  T= 4.02C roc= +0.29C/min vib=0.467g  0.099ms
+[ 478] t= 1860.0s  Normal   conf=0.531  T= 4.03C roc= +0.26C/min vib=0.462g  0.093ms
+[ 479] t= 1870.0s  Normal   conf=0.570  T= 4.08C roc= -0.02C/min vib=0.464g  0.202ms
+[ 480] t= 1880.0s  Normal   conf=0.555  T= 4.05C roc= -0.59C/min vib=0.454g  0.075ms
+[ 481] t= 1890.0s  Normal   conf=0.676  T= 4.00C roc= -0.17C/min vib=0.467g  0.201ms
+[ 482] t= 1900.0s  Normal   conf=0.555  T= 3.98C roc= +0.15C/min vib=0.462g  0.067ms
+[ 483] t= 1910.0s  Normal   conf=0.555  T= 4.00C roc= -0.14C/min vib=0.444g  0.074ms
+[ 484] t= 1920.0s  Normal   conf=0.828  T= 4.00C roc= +0.53C/min vib=0.422g  0.102ms
+[ 485] t= 1930.0s  Normal   conf=0.629  T= 3.99C roc= +0.05C/min vib=0.416g  0.078ms
+[ 486] t= 1940.0s  Normal   conf=0.754  T= 4.03C roc= -0.04C/min vib=0.449g  0.071ms
+[ 487] t= 1950.0s  Normal   conf=0.793  T= 4.01C roc= +0.01C/min vib=0.447g  0.093ms
+[ 488] t= 1960.0s  Normal   conf=0.570  T= 4.06C roc= +0.09C/min vib=0.443g  0.106ms
+[ 489] t= 1970.0s  Normal   conf=0.492  T= 4.08C roc= +0.18C/min vib=0.439g  0.074ms
+[ 490] t= 1980.0s  Normal   conf=0.707  T= 4.13C roc= -0.25C/min vib=0.461g  0.081ms
+[ 491] t= 1990.0s  Normal   conf=0.613  T= 4.05C roc= -0.35C/min vib=0.491g  0.094ms
+
+[logibridge] stopped after 491 inferences
